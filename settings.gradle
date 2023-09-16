@@ -1,0 +1,2 @@
+include ':mposplugin'
+include ':blusaltmpos'

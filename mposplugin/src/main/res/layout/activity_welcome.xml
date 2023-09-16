@@ -1,0 +1,137 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.WelcomeActivity">
+
+    <include
+        layout="@layout/toolbar_layout"
+        android:visibility="gone"/>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/toolbar_color"
+            app:buttonGravity="center_vertical"
+            app:navigationIcon="@drawable/ic_arrow_square_left">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Select Device"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/bluetoothImage"
+            android:layout_width="350dp"
+            android:layout_height="450dp"
+            android:src="@drawable/bluetooth_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appbar" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/search_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/background_btn"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:text="Search POS Device"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bluetoothImage" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/audio"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/title_audio"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/serial_port"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/serial_port"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/normal_bluetooth"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/normal_bluetooth" />
+
+            <Button
+                android:id="@+id/pos_bluetooth"
+                android:layout_width="200dp"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:text="@string/pos_bluetooth" />
+
+            <Button
+                android:id="@+id/other_bluetooth"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:text="@string/other_blu"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/print"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:text="@string/print"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/mp600_print"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:text="@string/mp600_print"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminateDrawable="@drawable/rotate_progress"
+            android:visibility="invisible"
+            tools:ignore="MissingConstraints" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
