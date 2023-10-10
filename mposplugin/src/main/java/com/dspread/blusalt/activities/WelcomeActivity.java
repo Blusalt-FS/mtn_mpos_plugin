@@ -20,7 +20,6 @@ import android.widget.Toast;
 import com.dspread.blusalt.R;
 import com.dspread.blusalt.activities.printer.PrintSettingActivity;
 import com.dspread.blusalt.beans.VersionEnty;
-import com.dspread.blusalt.databinding.ActivityMainBinding;
 import com.dspread.blusalt.databinding.ActivityWelcomeBinding;
 import com.dspread.blusalt.utils.NetCheckHelper;
 import com.dspread.blusalt.utils.TRACE;
@@ -41,12 +40,15 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 public class WelcomeActivity extends BaseActivity implements OnClickListener {
     private Button audio, serial_port, normal_blu, pos_blu, other_blu, print;
     private Intent intent;
+
+    private Toolbar welcometoolbar;
     private static final int BLUETOOTH_CODE = 100;
     private static final int LOCATION_CODE = 101;
     private LocationManager lm;//【Location management】
@@ -66,11 +68,12 @@ public class WelcomeActivity extends BaseActivity implements OnClickListener {
 //        setContentView(view);
 
 //        activityWelcomeBinding.searchButton.setOnClickListener (v -> {
-//            intent = new Intent(this, MainActivity.class);
+//            intent = new Intent(this, MposMainActivity.class);
 //            intent.putExtra("connect_type", 4);
 //            startActivity(intent);
 //        });
 
+        welcometoolbar = (Toolbar) findViewById(R.id.welcometoolbar);
         audio = (Button) findViewById(R.id.audio);
         serial_port = (Button) findViewById(R.id.serial_port);
         normal_blu = (Button) findViewById(R.id.normal_bluetooth);
@@ -84,6 +87,8 @@ public class WelcomeActivity extends BaseActivity implements OnClickListener {
         if (Build.MODEL.equals("D20")) {
             print.setVisibility(View.GONE);
         }
+
+        welcometoolbar.setOnClickListener(this);
         audio.setOnClickListener(this);
         serial_port.setOnClickListener(this);
         normal_blu.setOnClickListener(this);
@@ -126,47 +131,46 @@ public class WelcomeActivity extends BaseActivity implements OnClickListener {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.audio://Audio
-                intent = new Intent(this, OtherActivity.class);
-                intent.putExtra("connect_type", 1);
-                startActivity(intent);
-                break;
-            case R.id.serial_port://Serial Port
-                intent = new Intent(this, OtherActivity.class);
-                intent.putExtra("connect_type", 2);
-                startActivity(intent);
-                break;
-            case R.id.normal_bluetooth://Normal Bluetooth
-                intent = new Intent(this, MainActivity.class);
-                intent.putExtra("connect_type", 3);
-                startActivity(intent);
-                break;
-            case R.id.pos_bluetooth://Normal Bluetooth
-                intent = new Intent(this, PosBluetoothActivity.class);
-                intent.putExtra("connect_type", 3);
-                startActivity(intent);
-                break;
-            case R.id.other_bluetooth://Other Bluetooth，such as：BLE，，，
-                intent = new Intent(this, MainActivity.class);
-                intent.putExtra("connect_type", 4);
-                startActivity(intent);
-                break;
-            case R.id.search_button://Other Bluetooth，such as：BLE，，，
-                intent = new Intent(this, MainActivity.class);
-                intent.putExtra("connect_type", 4);
-                startActivity(intent);
-                break;
-            case R.id.print:
-                Log.d("pos", "print");
-                intent = new Intent(this, PrintSettingActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.mp600_print: //PrintSerialActivity
-                intent = new Intent(this, PrintSettingActivity.class);
-                startActivity(intent);
-                break;
+        int id = v.getId();
+        if (id == R.id.welcometoolbar) {//Audio
+            finish();
+        } else if (id == R.id.audio) {//Audio
+            intent = new Intent(this, OtherActivity.class);
+            intent.putExtra("connect_type", 1);
+            startActivity(intent);
+        } else if (id == R.id.serial_port) {//Serial Port
+            intent = new Intent(this, OtherActivity.class);
+            intent.putExtra("connect_type", 2);
+            startActivity(intent);
+        } else if (id == R.id.normal_bluetooth) {//Normal Bluetooth
+            intent = new Intent(this, MposMainActivity.class);
+            intent.putExtra("connect_type", 3);
+            startActivity(intent);
+        } else if (id == R.id.pos_bluetooth) {//Normal Bluetooth
+            intent = new Intent(this, PosBluetoothActivity.class);
+            intent.putExtra("connect_type", 3);
+            startActivity(intent);
+        } else if (id == R.id.other_bluetooth) {//Other Bluetooth，such as：BLE，，，
+            intent = new Intent(this, MposMainActivity.class);
+            intent.putExtra("connect_type", 4);
+            startActivity(intent);
+        } else if (id == R.id.search_button) {//Other Bluetooth，such as：BLE，，，
+            intent = new Intent(this, MposMainActivity.class);
+            intent.putExtra("connect_type", 3);
+            startActivity(intent);
+        } else if (id == R.id.print) {
+            Log.d("pos", "print");
+            intent = new Intent(this, PrintSettingActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.mp600_print) { //PrintSerialActivity
+            intent = new Intent(this, PrintSettingActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -218,7 +222,8 @@ public class WelcomeActivity extends BaseActivity implements OnClickListener {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case LOCATION_CODE: {
@@ -307,7 +312,8 @@ public class WelcomeActivity extends BaseActivity implements OnClickListener {
     }
 
 
-    public void downloadFileCourse(final Context context, String fileUrl, String destFileDir, String destFileName) {
+    public void downloadFileCourse(final Context context, String fileUrl, String
+            destFileDir, String destFileName) {
         try {
             //String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWxpZHRpbWUiOjAsInVzZXJpZCI6IjJlNmI0YTdmYzQ5NTRmMzNiZjI2ZjhmMjViNGFmNjIwIiwiZGV2aWNlaW5mbyI6ImVjZjA2OTcyMTgxODZhODIifQ.XJsDI1lzKd2_I7aABf-90mXiWgRU5mzDq3pThn2rKj8";
             OkGo.<File>get(fileUrl).tag(context)

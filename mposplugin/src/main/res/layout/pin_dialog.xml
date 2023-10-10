@@ -23,7 +23,7 @@
 		    android:id="@+id/confirmButton"
 		    android:layout_width="0dip"
 		    android:layout_height="wrap_content"
-			android:layout_margin="@dimen/dp_8"
+			android:layout_margin="8dp"
 			android:layout_weight="0.5"
 		    android:text="@string/confirm" />
 		
@@ -40,7 +40,7 @@
 		    android:layout_width="0dip"
 		    android:layout_height="wrap_content"
 		    android:layout_weight="0.5"
-			android:layout_margin="@dimen/dp_8"
+			android:layout_margin="8dp"
 			android:text="@string/cancel" />
 		
 	</LinearLayout>

@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.dspread.blusalt.R
 import com.dspread.blusalt.blusaltmpos.pay.TerminalResponse
+import com.dspread.blusalt.blusaltmpos.util.Constants
 import com.dspread.blusalt.databinding.ActivityTransactionStatusBinding
 import com.google.gson.Gson
 
@@ -21,7 +22,7 @@ class TransactionStatus : AppCompatActivity() {
         val view: View = activityTransactionStatusBinding!!.root
         setContentView(view)
 
-        var intent : Intent = intent
+        val intent : Intent = intent
         val result : String? = intent.getStringExtra("result")
         Log.e("TAG response", result.toString())
 
@@ -46,8 +47,23 @@ class TransactionStatus : AppCompatActivity() {
         }
 
         activityTransactionStatusBinding!!.backButton.setOnClickListener {
-            intent = Intent(this, AmountEntryActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+
+            appPreferenceHelper!!.setSharedPreferenceString(
+                Constants.TRANSACTION_RESPONSE,
+                response.data.posResponseCode
+            )
+
+            val intent = Intent(this@TransactionStatus, AmountEntryActivity::class.java)
+            intent.putExtra("responseCode", response.data.posResponseCode)
+//            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+//            intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
+
+            startActivity(intent)
+        }
+
+        activityTransactionStatusBinding!!.shareReceiptButton.setOnClickListener {
+            val intent = Intent(this@TransactionStatus, TransactionDetail::class.java)
+            intent.putExtra("result", result)
             startActivity(intent)
         }
 

@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/welcometoolbar"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:background="@color/toolbar_color"

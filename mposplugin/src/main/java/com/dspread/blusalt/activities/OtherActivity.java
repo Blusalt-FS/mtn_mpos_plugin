@@ -1604,7 +1604,7 @@ public class OtherActivity extends BaseActivity {
         public void onReturnDownloadRsaPublicKey(HashMap<String, String> map) {
             TRACE.d("onReturnDownloadRsaPublicKey(HashMap<String, String> map):" + map.toString());
             if (map == null) {
-                TRACE.d("MainActivity++++++++++++++map == null");
+                TRACE.d("MposMainActivity++++++++++++++map == null");
                 return;
             }
             String randomKeyLen = map.get("randomKeyLen");

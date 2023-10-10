@@ -4,8 +4,8 @@ import android.util.Log;
 
 import com.dspread.blusalt.BaseApplication;
 
-import io.sentry.Sentry;
-import io.sentry.protocol.User;
+//import io.sentry.Sentry;
+//import io.sentry.protocol.User;
 
 public class TRACE {
     public static String NEW_LINE = System.getProperty("line.separator");
@@ -16,14 +16,14 @@ public class TRACE {
     public static void i(String string) {
         if (isTesting) {
             Log.i(AppName, string);
-            Sentry.captureMessage(string);
+//            Sentry.captureMessage(string);
         }
     }
 
     public static void w(String string) {
         if (isTesting) {
             Log.e(AppName, string);
-            Sentry.captureMessage(string);
+//            Sentry.captureMessage(string);
         }
     }
 
@@ -38,10 +38,10 @@ public class TRACE {
         if (isTesting) {
             Log.d(AppName, string);
             String posID = BaseApplication.getmPosID();
-            User user = new User();
-            user.setId(posID);
-            Sentry.setUser(user);
-            Sentry.captureMessage(string);
+//            User user = new User();
+//            user.setId(posID);
+//            Sentry.setUser(user);
+//            Sentry.captureMessage(string);
         }
     }
 

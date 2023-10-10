@@ -90,7 +90,7 @@ public class PrintBarCodeActivity extends Activity {
 					System.arraycopy(qrHead, 0, barCodeData, 0, qrHead.length);
 					System.arraycopy(btdata, 0, barCodeData, qrHead.length, btdata.length);
 					
-//					MainActivity.pl.write(new byte[]{0x1B,0x61,0x01});
+//					MposMainActivity.pl.write(new byte[]{0x1B,0x61,0x01});
 					//居中指令
 					PrintSettingActivity.pl.setAlignment(PrinterClass.Alignment.ALIGN_MIDDLE);
 					PrintSettingActivity.pl.write(barCodeData);
@@ -101,9 +101,9 @@ public class PrintBarCodeActivity extends Activity {
 					
 //					Bitmap btMap = BarcodeCreater.creatBarcode(PrintBarCodeActivity.this,
 //							message, 384, 100, true, 1);
-//					MainActivity.pl.printImage(btMap);
+//					MposMainActivity.pl.printImage(btMap);
 					
-//					MainActivity.pl.write(new byte[] { 0x1d, 0x0c });
+//					MposMainActivity.pl.write(new byte[] { 0x1d, 0x0c });
 					
 					try {
 						image_eq.setImageBitmap(CreateOneDCode(message));

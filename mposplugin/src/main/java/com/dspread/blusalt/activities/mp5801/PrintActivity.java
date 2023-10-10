@@ -146,44 +146,30 @@ public class PrintActivity extends Activity implements OnClickListener {
     public void onClick(View v) {
         // TODO Auto-generated method stub
         Intent intent = new Intent();
-        switch (v.getId()) {
-            //打印文本
-            case R.id.textPrint_text:
-            case R.id.textPrint_image:
-                intent.setClass(PrintActivity.this,
-                        PrintTextActivity.class);
-                break;
+        int id = v.getId();//打印文本
+        if (id == R.id.textPrint_text || id == R.id.textPrint_image) {
+            intent.setClass(PrintActivity.this,
+                    PrintTextActivity.class);
             //打印图片
-            case R.id.imagePrint_text:
-            case R.id.imagePrint_image:
-                intent.setClass(PrintActivity.this,
-                        PrintImageActivity.class);
-                break;
+        } else if (id == R.id.imagePrint_text || id == R.id.imagePrint_image) {
+            intent.setClass(PrintActivity.this,
+                    PrintImageActivity.class);
             //打印一维条形码维码
-            case R.id.barPrint_text:
-            case R.id.barPrint_image:
-                intent.setClass(PrintActivity.this,
-                        PrintBarCodeActivity.class);
-                break;
+        } else if (id == R.id.barPrint_text || id == R.id.barPrint_image) {
+            intent.setClass(PrintActivity.this,
+                    PrintBarCodeActivity.class);
             //二维码
-            case R.id.eqPrint_text:
-            case R.id.eqPrint_image:
-                intent.setClass(PrintActivity.this,
-                        PrintQrCodeActivity.class);
-                break;
+        } else if (id == R.id.eqPrint_text || id == R.id.eqPrint_image) {
+            intent.setClass(PrintActivity.this,
+                    PrintQrCodeActivity.class);
             //设置
-            case R.id.setting_text:
-            case R.id.setting_image:
-                intent.setClass(PrintActivity.this,
-                        PrintCmdActivity.class);
-                break;
+        } else if (id == R.id.setting_text || id == R.id.setting_image) {
+            intent.setClass(PrintActivity.this,
+                    PrintCmdActivity.class);
             //传输code
-            case R.id.codeChage_text:
-            case R.id.codeChage_image:
-            default:
-                intent.setClass(PrintActivity.this,
-                        BlackMarkActivity.class);
-                break;
+        } else {
+            intent.setClass(PrintActivity.this,
+                    BlackMarkActivity.class);
         }
         startActivity(intent);
 

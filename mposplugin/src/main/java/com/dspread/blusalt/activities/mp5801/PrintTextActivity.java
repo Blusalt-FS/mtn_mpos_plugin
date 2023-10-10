@@ -72,7 +72,7 @@ public class PrintTextActivity extends Activity {
             }
         });
 //		 et_input.setText("อาเหวิน : สวัสดียามค");
-//		MainActivity.pl.write(new byte[] { 0x1b, 0x23,0x23,0x43,0x44,0x54,0x59,0x02});
+//		MposMainActivity.pl.write(new byte[] { 0x1b, 0x23,0x23,0x43,0x44,0x54,0x59,0x02});
 
 //		registerReceiver(mReceiver, makeFilter());
 
@@ -87,7 +87,7 @@ public class PrintTextActivity extends Activity {
                 //0x1b, 0x74,0x35,加泰隆语,丹麦语,德语,英语,西班牙语,芬兰语,法语,冰岛语,意大利语,荷兰语,挪威语,葡萄牙语,
 //				                                                     印度尼西亚语,巴士克语,南非语,法罗语,马来语,斯瓦希里语,加里西亚语,瑞典语
 
-//				MainActivity.pl.write(new byte[] { 0x1b, 0x74,0x39});
+//				MposMainActivity.pl.write(new byte[] { 0x1b, 0x74,0x39});
 //				//右对齐
                 PrintSettingActivity.pl.setAlignment(PrinterClass.Alignment.ALIGN_LEFT);
 //				//字体加粗
@@ -105,11 +105,11 @@ public class PrintTextActivity extends Activity {
 //					// TODO Auto-generated catch block
 //					e.printStackTrace();
 //				}
-//				MainActivity.pl.write(send);
+//				MposMainActivity.pl.write(send);
                 PrintSettingActivity.pl.printText("\n");
                 Log.e("tag", "" + et_input.getText().toString().trim());
                 //0x1d, 0x0c 表示切换到下一黑标处（无黑标时切换一行）
-//				MainActivity.pl.write(new byte[] { 0x1d, 0x0c });
+//				MposMainActivity.pl.write(new byte[] { 0x1d, 0x0c });
 
                 //0x1d, 0x0c 表示切换到下一黑标处（无黑标时切换一行）
                 PrintSettingActivity.pl.moveNextBlackLocation();

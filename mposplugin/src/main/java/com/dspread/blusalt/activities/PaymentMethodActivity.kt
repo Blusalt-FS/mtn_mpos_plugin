@@ -19,8 +19,12 @@ class PaymentMethodActivity : BaseActivity() {
         setContentView(view)
 
         activityPaymentMethodBinding!!.connectBleText.setOnClickListener {
-            intent = Intent(this, TransactionStatus::class.java)
+            intent = Intent(this, WelcomeActivity::class.java)
             startActivity(intent)
+        }
+
+        activityPaymentMethodBinding!!.toolbar.setOnClickListener {
+            finish()
         }
 
         activityPaymentMethodBinding!!.connectBleButton.setOnClickListener {

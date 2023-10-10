@@ -2,6 +2,7 @@ package com.dspread.blusalt.activities.mp5801;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -110,51 +111,48 @@ public class BlackMarkActivity extends Activity implements OnClickListener {
 			this.finish();
 			return;
 		}
-		switch (v.getId()) {
-		case R.id.bm_open:
-			PrintSettingActivity.pl.write(new byte[] { 0x1F, 0x1B, 0x1F, (byte) 0x80,
-					0x04, 0x05, 0x06, 0x44 });
+		int id = v.getId();
+		if (id == R.id.bm_open) {
+			PrintSettingActivity.pl.write(new byte[]{0x1F, 0x1B, 0x1F, (byte) 0x80,
+					0x04, 0x05, 0x06, 0x44});
 			isOpen = true;
-			bm_open.setTextColor(android.graphics.Color.GREEN);
+			bm_open.setTextColor(Color.GREEN);
 			bm_open.setEnabled(false);
-			bm_close.setTextColor(android.graphics.Color.BLACK);
+			bm_close.setTextColor(Color.BLACK);
 			bm_close.setEnabled(true);
-			break;
-		case R.id.bm_close:
-			PrintSettingActivity.pl.write(new byte[] { 0x1F, 0x1B, 0x1F, (byte) 0x80,
-					0x04, 0x05, 0x06, 0x66 });
-			
+		} else if (id == R.id.bm_close) {
+			PrintSettingActivity.pl.write(new byte[]{0x1F, 0x1B, 0x1F, (byte) 0x80,
+					0x04, 0x05, 0x06, 0x66});
+
 			isOpen = false;
-			bm_close.setTextColor(android.graphics.Color.RED);
+			bm_close.setTextColor(Color.RED);
 			bm_close.setEnabled(false);
-			bm_open.setTextColor(android.graphics.Color.BLACK);
+			bm_open.setTextColor(Color.BLACK);
 			bm_open.setEnabled(true);
-			break;
-		case R.id.btn_to_bmark:
+		} else if (id == R.id.btn_to_bmark) {
 			if (isOpen) {
 				switch (choose) {
-				case 1:
-					PrintSettingActivity.pl.printText("TesCode:123456789");
-					PrintSettingActivity.pl.moveNextBlackLocation();
-					break;
-				case 2:
-					printQRCode();
-					PrintSettingActivity.pl.moveNextBlackLocation();
-					break;
-                case 3:
-                	printBarCode();
-					PrintSettingActivity.pl.moveNextBlackLocation();
-					break;
-				default:
-					break;
+					case 1:
+						PrintSettingActivity.pl.printText("TesCode:123456789");
+						PrintSettingActivity.pl.moveNextBlackLocation();
+						break;
+					case 2:
+						printQRCode();
+						PrintSettingActivity.pl.moveNextBlackLocation();
+						break;
+					case 3:
+						printBarCode();
+						PrintSettingActivity.pl.moveNextBlackLocation();
+						break;
+					default:
+						break;
 				}
 			} else {
 				Toast.makeText(getApplicationContext(),
-						getString(R.string.black_mark_to_plz_open), Toast.LENGTH_SHORT)
+								getString(R.string.black_mark_to_plz_open), Toast.LENGTH_SHORT)
 						.show();
 			}
-			break;
-		case R.id.btn_update:
+		} else if (id == R.id.btn_update) {
 			if (isOpen) {
 
 				str_heigt = et_heigt.getText().toString();
@@ -162,8 +160,8 @@ public class BlackMarkActivity extends Activity implements OnClickListener {
 				str_wight = et_wight.getText().toString();
 
 				str_voltage = et_voltage.getText().toString();
-				
-				str_position=et_position.getText().toString();
+
+				str_position = et_position.getText().toString();
 
 				if (str_heigt == null || str_heigt.length() <= 0) {
 					Toast.makeText(getApplicationContext(), "heigt is null",
@@ -187,11 +185,11 @@ public class BlackMarkActivity extends Activity implements OnClickListener {
 				}
 
 				int_heigt = Integer.parseInt(str_heigt, 10);
-				Log.e("int_heigt", ""+int_heigt);
-				int_wight = Integer.parseInt(str_wight, 10)*8;
+				Log.e("int_heigt", "" + int_heigt);
+				int_wight = Integer.parseInt(str_wight, 10) * 8;
 				int_position = Integer.parseInt(str_position, 10);
 				int_voltage = Integer.parseInt(str_voltage, 10);
-				
+
 //				// 高度
 				PrintSettingActivity.pl.write(twoToOne(new BtService(BlackMarkActivity.this, null, null).maxBlackMarkHeiLen, toLH(int_heigt)));
 ////			// 宽度
@@ -200,32 +198,29 @@ public class BlackMarkActivity extends Activity implements OnClickListener {
 				PrintSettingActivity.pl.write(twoToOne(new BtService(BlackMarkActivity.this, null, null).setBmBeginStep,
 						toLH(int_position)));
 				// 电压
-				PrintSettingActivity.pl.write(twoToOne(new BtService(BlackMarkActivity.this, null, null).setBmVoltage,toLH(int_voltage))
-						);
-				
+				PrintSettingActivity.pl.write(twoToOne(new BtService(BlackMarkActivity.this, null, null).setBmVoltage, toLH(int_voltage))
+				);
+
 //				Log.e("起始�?,Arrays.toString(toLH(int_position)));
-//				
+//
 //				Log.e("测试", Arrays.toString(toLH(2500)));
-				
-				Log.e("起始位置",Arrays.toString(twoToOne(new BtService(BlackMarkActivity.this, null, null).setBmBeginStep,
+
+				Log.e("起始位置", Arrays.toString(twoToOne(new BtService(BlackMarkActivity.this, null, null).setBmBeginStep,
 						toLH(int_position))));
-				
+
 				editor.putString("heigt", str_heigt);
 				editor.putString("wight", str_wight);
 				editor.putString("position", str_position);
 				editor.putString("voltage", str_voltage);
-				
+
 				editor.commit();
-				
+
 				Toast.makeText(getApplicationContext(), "Update Success", Toast.LENGTH_SHORT).show();
 			} else {
 				Toast.makeText(getApplicationContext(),
-						getString(R.string.black_mark_to_plz_open), Toast.LENGTH_SHORT)
+								getString(R.string.black_mark_to_plz_open), Toast.LENGTH_SHORT)
 						.show();
 			}
-			break;
-		default:
-			break;
 		}
 	}
 

@@ -79,10 +79,10 @@ public class PrintQrCodeActivity extends Activity {
 //				 * 00 31 43 n 十进制 29 40 107 03 0 49 67 n 功能：设置QR CODE 单元大小。
 //				 * 说明：·n 对应QR版本号， 决定QR CODE的高度与宽度。 · 1≤n ≤16。(十六进制为0x01≤n ≤0x0f)
 //				 */
-//				 MainActivity.pl.write(new
+//				 MposMainActivity.pl.write(new
 //				 byte[]{0x1d,0x28,0x6b,0x03,0x00,0x31,0x43,0x05});
 //				
-//				 MainActivity.pl.write(new
+//				 MposMainActivity.pl.write(new
 //				 byte[]{0x1d,0x28,0x6b,0x03,0x00,0x31,0x45,0x05});
 //
 //				 byte[] qrHead=new
@@ -94,22 +94,22 @@ public class PrintQrCodeActivity extends Activity {
 //				 btdata.length);
 //
 //				 //使二维码居中
-//				 MainActivity.pl.write(new byte[]{0x1b,0x61,0x01});
+//				 MposMainActivity.pl.write(new byte[]{0x1b,0x61,0x01});
 //				 
-//				 MainActivity.pl.write(qrData);
-//				 MainActivity.pl.write(new byte[]{0x1d,0x28,0x6b,0x03,0x00,0x31,0x51,0x30});
-//				 MainActivity.pl.write(new byte[] { 0x1d, 0x0c });
-//				MainActivity.pl.write(new byte[]{0x1b,0x61,0x01});
-//				MainActivity.pl.write(new byte[]{0x1d,0x21,0x01});
-//				MainActivity.pl.write(new byte[]{0x1b,0x45,0x01});
-//				MainActivity.pl.printText("民建饭店\n");
-//				MainActivity.pl.printText("本地推荐饿了么下单\n");
+//				 MposMainActivity.pl.write(qrData);
+//				 MposMainActivity.pl.write(new byte[]{0x1d,0x28,0x6b,0x03,0x00,0x31,0x51,0x30});
+//				 MposMainActivity.pl.write(new byte[] { 0x1d, 0x0c });
+//				MposMainActivity.pl.write(new byte[]{0x1b,0x61,0x01});
+//				MposMainActivity.pl.write(new byte[]{0x1d,0x21,0x01});
+//				MposMainActivity.pl.write(new byte[]{0x1b,0x45,0x01});
+//				MposMainActivity.pl.printText("民建饭店\n");
+//				MposMainActivity.pl.printText("本地推荐饿了么下单\n");
 //				new Handler().postDelayed(new Runnable() {
 //					@Override
 //					public void run() {
 //						// TODO Auto-generated method stub
-//						MainActivity.pl.write(new byte[]{0x1b,0x61,0x00});
-//						MainActivity.pl.printImage(twoBtmap2One(createQRImage("民建饭店", 300, 300), word2bitmap(str)));
+//						MposMainActivity.pl.write(new byte[]{0x1b,0x61,0x00});
+//						MposMainActivity.pl.printImage(twoBtmap2One(createQRImage("民建饭店", 300, 300), word2bitmap(str)));
 //					}
 //				}, 200);
 			

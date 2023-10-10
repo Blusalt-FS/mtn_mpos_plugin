@@ -5,8 +5,8 @@ import android.content.Context;
 
 import com.dspread.blusalt.BaseApplication;
 
-import io.sentry.Sentry;
-import io.sentry.protocol.User;
+//import io.sentry.Sentry;
+//import io.sentry.protocol.User;
 
 /**
  * Created by ouyang on 2023/03/14.
@@ -45,7 +45,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             mDefaultHandler.uncaughtException(thread, ex);
         } else {
             TRACE.d("else uncaughtException");
-            Sentry.captureException(ex);
+//            Sentry.captureException(ex);
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(1);
         }
@@ -62,10 +62,10 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             return false;
         try {
             String posID = BaseApplication.getmPosID();
-            User user = new User();
-            user.setId(posID);
-            Sentry.setUser(user);
-            Sentry.captureException(ex);
+//            User user = new User();
+//            user.setId(posID);
+//            Sentry.setUser(user);
+//            Sentry.captureException(ex);
             //Sentry.captureMessage(ex.toString());
             TRACE.d("uncaughtException handleException: sentry");
         } catch (Exception e) {

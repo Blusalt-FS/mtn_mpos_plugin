@@ -31,6 +31,11 @@ public class ConfirmTransaction extends AppCompatActivity {
 //        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
+
+        binding.toolbar.setOnClickListener( v -> {
+            finish();
+        });
+
         binding.initiateButton.setOnClickListener( v -> {
             Intent intent = new Intent(ConfirmTransaction.this, PaymentMethodActivity.class);
             startActivity(intent);

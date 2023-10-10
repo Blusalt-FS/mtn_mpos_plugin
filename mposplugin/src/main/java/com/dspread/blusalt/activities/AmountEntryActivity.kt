@@ -1,5 +1,7 @@
 package com.dspread.blusalt.activities
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,9 +15,11 @@ import com.dspread.blusalt.databinding.ActivityAmountEntryBinding
 
 
 var activityAmountEntryBinding: ActivityAmountEntryBinding? = null
-var appPreferenceHelper : AppPreferenceHelper? = null
+var appPreferenceHelper: AppPreferenceHelper? = null
 
 class AmountEntryActivity : AppCompatActivity() {
+
+    var result: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +30,11 @@ class AmountEntryActivity : AppCompatActivity() {
         val view: View = activityAmountEntryBinding!!.root
         setContentView(view)
 
-        var builder: java.lang.StringBuilder = StringBuilder().append("")
+        activityAmountEntryBinding!!.toolbar.setOnClickListener {
+            finish()
+        }
+
+        val builder: java.lang.StringBuilder = StringBuilder().append("")
 
         activityAmountEntryBinding!!.amountText.apply {
             setCurrency("₦")
@@ -67,12 +75,37 @@ class AmountEntryActivity : AppCompatActivity() {
             Log.e("TAG amount", activityAmountEntryBinding!!.amountText.cleanDoubleValue.toString())
             Log.e("TAG amount", activityAmountEntryBinding!!.amountText.cleanIntValue.toString())
 
-            appPreferenceHelper!!.setSharedPreferenceString(Constants.AMOUNT, activityAmountEntryBinding!!.amountText.text.toString())
-            appPreferenceHelper!!.setSharedPreferenceString(Constants.AMOUNT_INT, activityAmountEntryBinding!!.amountText.cleanIntValue.toString())
+            appPreferenceHelper!!.setSharedPreferenceString(
+                Constants.AMOUNT,
+                activityAmountEntryBinding!!.amountText.text.toString()
+            )
+            appPreferenceHelper!!.setSharedPreferenceString(
+                Constants.AMOUNT_INT,
+                activityAmountEntryBinding!!.amountText.cleanIntValue.toString()
+            )
 
-            val intent = Intent(this@AmountEntryActivity, ConfirmTransaction::class.java)
-            startActivity(intent)
+            val int = Intent(this@AmountEntryActivity, ConfirmTransaction::class.java)
+            startActivity(int)
         }
 
     }
+
+    override fun onStart() {
+        super.onStart()
+//        result = "Z1(92)"
+        result = appPreferenceHelper!!.getSharedPreferenceString(Constants.TRANSACTION_RESPONSE)
+        Log.e("My Result", "result " + result)
+        if (!result.isNullOrEmpty()) {
+            val mIntent: Intent = intent
+            Log.e("Trans StatusCode", result.toString())
+            mIntent.putExtra("responseCode", result.toString())
+            setResult(Activity.RESULT_OK, mIntent)
+            appPreferenceHelper!!.setSharedPreferenceString(
+                Constants.TRANSACTION_RESPONSE,
+                ""
+            )
+            finish()
+        }
+    }
+
 }

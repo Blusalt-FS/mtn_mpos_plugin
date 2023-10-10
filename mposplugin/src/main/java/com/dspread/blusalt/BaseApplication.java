@@ -45,8 +45,8 @@ public class BaseApplication extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         //  Default init
-        XCrash.init(this);
-        OkGo.getInstance().init(this);
+//        XCrash.init(this);
+//        OkGo.getInstance().init(this);
 //        initXHttp();
 //
 //        initOKHttpUtils();
