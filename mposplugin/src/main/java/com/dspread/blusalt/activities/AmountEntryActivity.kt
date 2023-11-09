@@ -1,14 +1,18 @@
 package com.dspread.blusalt.activities
 
-import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.davidmiguel.numberkeyboard.NumberKeyboardListener
+import com.dspread.blusalt.MemoryManager
 import com.dspread.blusalt.R
+import com.dspread.blusalt.blusaltmpos.pos.AppLog
 import com.dspread.blusalt.blusaltmpos.util.AppPreferenceHelper
 import com.dspread.blusalt.blusaltmpos.util.Constants
 import com.dspread.blusalt.databinding.ActivityAmountEntryBinding
@@ -16,19 +20,41 @@ import com.dspread.blusalt.databinding.ActivityAmountEntryBinding
 
 var activityAmountEntryBinding: ActivityAmountEntryBinding? = null
 var appPreferenceHelper: AppPreferenceHelper? = null
-
+var memoryManager: MemoryManager = MemoryManager.getInstance()
 class AmountEntryActivity : AppCompatActivity() {
 
     var result: String? = null
+    var api_key: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_amount_entry)
         appPreferenceHelper = AppPreferenceHelper(this)
+        memoryManager.init(applicationContext)
 
         activityAmountEntryBinding = ActivityAmountEntryBinding.inflate(layoutInflater)
         val view: View = activityAmountEntryBinding!!.root
         setContentView(view)
+
+        val intent = intent
+        try {
+            if (intent != null) {
+                api_key = intent.getStringExtra("APIKEY")
+                if (!api_key.isNullOrEmpty()) {
+                    appPreferenceHelper!!.setSharedPreferenceString(
+                        Constants.APIKEY,
+                        api_key
+                    )
+                    init(api_key, applicationContext)
+//                    Log.e("API KEY", api_key.toString())
+                }else {
+                    Toast.makeText(applicationContext, "No API Key", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         activityAmountEntryBinding!!.toolbar.setOnClickListener {
             finish()
@@ -90,11 +116,24 @@ class AmountEntryActivity : AppCompatActivity() {
 
     }
 
+    fun init(secretKey: String?, context: Context?) {
+        if (!TextUtils.isEmpty(secretKey)) {
+            try {
+                MemoryManager.getInstance().putUserSecretKey(secretKey)
+            } catch (e: java.lang.Exception) {
+                AppLog.e("prepareForPrinter", e.message)
+            }
+        } else {
+            AppLog.e("init", "Secret Key is Empty")
+        }
+    }
+
     override fun onStart() {
         super.onStart()
 //        result = "Z1(92)"
+
         result = appPreferenceHelper!!.getSharedPreferenceString(Constants.TRANSACTION_RESPONSE)
-        Log.e("My Result", "result " + result)
+        Log.e("Trans Result", "result " + result)
         if (!result.isNullOrEmpty()) {
             val mIntent: Intent = intent
             Log.e("Trans StatusCode", result.toString())

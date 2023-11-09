@@ -3,6 +3,8 @@ package com.dspread.blusalt;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.dspread.blusalt.activities.MposMainActivity;
+
 /**
  * Created by AYODEJI on 10/10/2020.
  *
@@ -10,27 +12,33 @@ import android.content.SharedPreferences;
 public class MemoryManager {
 
     private static MemoryManager sInstance;
-    private final SharedPreferences mSharedPreferences;
-    private final SharedPreferences.Editor editor;
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor editor;
     private static final String PREF_NAME = "terminal_sdk_app";
     private static final int PREF_MODE = 0;
     private static final String KEY_USER1 = "user1";
 
+    private Context mContext;
     private static final String KEY_IS_LIVE_TOKEN = "is_live";
 
     private static final String KEY_KEEP_STATE = "keep_state";
 
+    public MemoryManager() {
+    }
 
-    private MemoryManager(Context context) {
-        mSharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+    public void init(Context context) {
+        if (sInstance == null) {
+            sInstance = new MemoryManager();
+        }
+        this.mContext = context;
+        mSharedPreferences = mContext.getApplicationContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         editor = mSharedPreferences.edit();
     }
 
-    public static synchronized MemoryManager getInstance(Context context) {
-        if (sInstance == null) sInstance = new MemoryManager(context);
+    public static synchronized MemoryManager getInstance() {
+        if (sInstance == null) sInstance = new MemoryManager();
         return sInstance;
     }
-
 
     public String getSecretKey() {
         if (mSharedPreferences.getString(KEY_USER1, null) != null) {

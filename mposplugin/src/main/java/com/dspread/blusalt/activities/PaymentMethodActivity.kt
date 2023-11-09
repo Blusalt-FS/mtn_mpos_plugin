@@ -31,6 +31,16 @@ class PaymentMethodActivity : BaseActivity() {
             intent = Intent(this, WelcomeActivity::class.java)
             startActivity(intent)
         }
+
+        activityPaymentMethodBinding!!.connectCableText.setOnClickListener {
+            intent = Intent(this, OtherActivity::class.java)
+            startActivity(intent)
+        }
+
+        activityPaymentMethodBinding!!.connectCableButton.setOnClickListener {
+            intent = Intent(this, OtherActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onToolbarLinstener() {

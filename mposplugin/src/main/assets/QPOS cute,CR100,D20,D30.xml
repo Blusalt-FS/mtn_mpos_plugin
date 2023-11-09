@@ -1,11 +1,11 @@
 <app><!--1:00000000000000000000000000000000-->
 	<9F06>00000000000000000000000000000000</9F06> <!--Application Identifier(AID)–terminal-->
-	<5F2A>0484</5F2A><!--Transaction Currency Code-->
+	<5F2A>0566</5F2A><!--Transaction Currency Code-->
 	<5F36>00</5F36><!--Tranasction Currency Exponent-->
 	<9F01>000000000000</9F01><!--Acquirer Identifier-->
 	<9F15>1234</9F15><!--Merchant Category Code-->
 	<9F16>313132323333343435353636373738</9F16><!--Merchant Identifier-->
-	<9F1A>0484</9F1A><!--Terminal Country Code-->
+	<9F1A>0566</9F1A><!--Terminal Country Code-->
 	<9F1C>0000000000000000</9F1C><!--Terminal Identification-->
 	<9F1E>0000000000000000</9F1E><!--Interface Device (IFD) Serial Number-->
 	<9F33>E0F8C8</9F33><!--Terminal Capabilities-->

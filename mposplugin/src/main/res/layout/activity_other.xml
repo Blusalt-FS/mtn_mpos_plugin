@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:fadingEdge="none"
-              android:orientation="vertical">
-    <include layout="@layout/toolbar_layout"/>
-    <ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:fadingEdge="none"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/toolbar_layout"
+        android:visibility="gone" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/hometoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/toolbar_color"
+            app:buttonGravity="center_vertical"
+            app:navigationIcon="@drawable/ic_arrow_square_left">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mtoolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Select Device"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/parentScrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/appbar">
 
         <LinearLayout
             android:id="@+id/lin"
@@ -27,7 +66,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:visibility="gone"
                     android:text="@string/open_audio"/>
 
                 <Button
@@ -35,16 +73,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:visibility="gone"
                     android:text="@string/open_serial_port"/>
 
-                <Button
-                    android:id="@+id/doTradeButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:enabled="false"
-                    android:text="@string/check_card"/>
+<!--                <Button-->
+<!--                    android:id="@+id/doTradeButton"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:enabled="false"-->
+<!--                    android:text="@string/check_card"/>-->
 
                 <Button
                     android:id="@+id/disconnect"
@@ -54,12 +91,12 @@
                     android:enabled="false"
                     android:text="@string/disconnect"/>
 
-                <Button
-                    android:id="@+id/btnUSB"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/scan_usb_device"/>
+<!--                <Button-->
+<!--                    android:id="@+id/btnUSB"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="@string/scan_usb_device"/>-->
             </LinearLayout>
 
 
@@ -82,6 +119,7 @@
                     android:layout_marginLeft="5dip"
                     android:layout_marginRight="5dip"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:hint="key index"/>
 
 
@@ -91,6 +129,7 @@
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="5dip"
                     android:layout_marginRight="5dip"
+                    android:visibility="gone"
                     android:editable="false"/>
 
                 <EditText
@@ -99,13 +138,194 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dip"
                     android:layout_marginRight="5dip"
+                    android:visibility="gone"
                     android:hint="chip data"/>
 
             </LinearLayout>
 
-            <include android:visibility="visible"
+            <include android:visibility="gone"
                 layout="@layout/view_mifare"/>
 
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/insert_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="32dp"
+        android:visibility="gone"
+        android:backgroundTint="@color/background_btn_light"
+        android:textColor="@color/black"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="₦ 0.00"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/appbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appbar" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="20dp"
+        android:scaleType="centerInside"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/appbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/insert_amount" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/insert_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Insert Card into the mPOS"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/gifImageView"
+        app:layout_constraintStart_toStartOf="@+id/gifImageView"
+        app:layout_constraintTop_toBottomOf="@+id/gifImageView" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/usbImage"
+        android:layout_width="350dp"
+        android:layout_height="450dp"
+        android:src="@drawable/ic_cable_connection"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/appbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appbar" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/validateImage"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:src="@drawable/ic_validate"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/appbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appbar" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/validate_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Validate Transaction"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/validateImage"
+        app:layout_constraintStart_toStartOf="@+id/validateImage"
+        app:layout_constraintTop_toBottomOf="@+id/validateImage" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about_to_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="You are about to pay"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/validateImage"
+        app:layout_constraintStart_toStartOf="@+id/validateImage"
+        app:layout_constraintTop_toBottomOf="@+id/validate_text" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/validate_amount_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="₦ 0.00"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/validateImage"
+        app:layout_constraintStart_toStartOf="@+id/validateImage"
+        app:layout_constraintTop_toBottomOf="@+id/about_to_text" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/connected_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connected Successfully"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usbImage" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnUSB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/background_btn"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="Connect USB Device"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/doTradeButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/background_btn"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="Proceed"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/continueBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/background_btn"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="Continue"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

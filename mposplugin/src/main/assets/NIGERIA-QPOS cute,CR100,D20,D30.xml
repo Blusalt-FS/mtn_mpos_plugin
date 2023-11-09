@@ -194,7 +194,25 @@
 </app>
 
 <app><!--16-->
-</app>
+<9F06>A0000003710001</9F06> <!--Application Identifier(AID)–terminal-->
+<DF01>00</DF01> <!--Application Selection Indicator-->
+<9F09>008C</9F09> <!--Terminal Application Version Number-->
+<9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
+<9F66>36E04000</9F66> <!--Contactless Terminal Transaction Qualifiers-->
+<9F8125>9F3704</9F8125> <!--Contact Default Dynamic Data Authentication Data Object List (DDOL)-->
+<9F8127>00</9F8127> <!--Contact Maximum Target Percentage to be Used for Biased Random Selection-->
+<9F8128>00</9F8128> <!--Contact Target Percentage to Be Used for Random Selection-->
+<9F8129>00000000</9F8129> <!--Contact Threshold Value for Biased random Selection-->
+<9F812A>DC4000A800</9F812A> <!--Contact Terminal Action Code Default-->
+<9F812B>0010000000</9F812B> <!--Contact Terminal Action Code Denial-->
+<9F812C>DC4004F800</9F812C> <!--Contact Terminal Action Code Online-->
+<9F928100>05010000</9F928100> <!--Contactless Unknown-->
+<9F928101>00</9F928101> <!--Contactless online/declined when the ODA failed, 0:declined;1:online-->
+<9F92810A>FE00</9F92810A> <!--Contactless Terminal Limit Configuration-->
+<9F92810D>999999999999</9F92810D> <!--Contactless Amount Limit-->
+<9F92810E>000000000000</9F92810E> <!--Contactless CVM Amount Limit-->
+<9F92810F>000000001388</9F92810F> <!--Contactless Terminal Offline Floor Limit-->
+    </app>
 
 <app><!--17-->
 </app>

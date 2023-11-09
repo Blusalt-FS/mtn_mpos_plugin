@@ -1,48 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
-    
-	<EditText
-	    android:id="@+id/pinEditText"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_marginLeft="5dip"
-	    android:layout_marginRight="5dip"
-	    android:hint="@string/pin"
-	    android:inputType="numberPassword" />
-	
-	<LinearLayout
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_below="@id/pinEditText"
-	    android:orientation="horizontal" >
-	    
-	    <Button
-		    android:id="@+id/confirmButton"
-		    android:layout_width="0dip"
-		    android:layout_height="wrap_content"
-			android:layout_margin="8dp"
-			android:layout_weight="0.5"
-		    android:text="@string/confirm" />
-		
-		<Button
-		    android:id="@+id/bypassButton"
-		    android:layout_width="0dip"
-		    android:layout_height="wrap_content"
-		    android:layout_weight="0.5"
-			android:visibility="gone"
-		    android:text="@string/bypass" />
-		
-		<Button
-		    android:id="@+id/cancelButton"
-		    android:layout_width="0dip"
-		    android:layout_height="wrap_content"
-		    android:layout_weight="0.5"
-			android:layout_margin="8dp"
-			android:text="@string/cancel" />
-		
-	</LinearLayout>
-	    
-</RelativeLayout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@color/white"
+		tools:context=".activities.PaymentMethodActivity">
+
+
+		<com.google.android.material.appbar.AppBarLayout
+			android:id="@+id/appbar"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			app:elevation="0dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent">
+
+			<com.google.android.material.appbar.MaterialToolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="80dp"
+				android:background="@color/toolbar_color"
+				app:buttonGravity="center_vertical"
+				app:navigationIcon="@drawable/ic_arrow_square_left">
+
+				<com.google.android.material.textview.MaterialTextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:text="Authorize Transaction"
+					android:textStyle="bold"
+					android:textColor="@color/black"
+					android:textSize="16sp" />
+			</com.google.android.material.appbar.MaterialToolbar>
+
+		</com.google.android.material.appbar.AppBarLayout>
+
+		<com.google.android.material.textview.MaterialTextView
+			android:id="@+id/payType"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:text="Enter Card Pin"
+			android:layout_marginTop="32dp"
+			android:textColor="@color/black"
+			android:textSize="16sp"
+			android:textStyle="bold"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/appbar" />
+
+<!--		<EditText-->
+<!--			android:id="@+id/pinEditText"-->
+<!--			android:layout_width="150dp"-->
+<!--			android:layout_height="wrap_content"-->
+<!--			android:layout_marginLeft="5dip"-->
+<!--			android:layout_marginTop="32dp"-->
+<!--			android:layout_marginRight="5dip"-->
+<!--			android:backgroundTintMode="@color/background_btn"-->
+<!--			android:gravity="center"-->
+<!--			android:inputType="numberPassword"-->
+<!--			app:layout_constraintEnd_toEndOf="parent"-->
+<!--			app:layout_constraintStart_toStartOf="parent"-->
+<!--			app:layout_constraintTop_toBottomOf="@+id/payType" />-->
+
+		<com.poovam.pinedittextfield.SquarePinField
+			android:id="@+id/pinEditText"
+			android:layout_width="270dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="32dp"
+			android:inputType="numberPassword"
+			android:textSize="26sp"
+			app:circleRadius="15dp"
+			app:cornerRadius="10dp"
+			app:fieldColor="#A4A4A4"
+			app:highlightColor="@color/black"
+			app:noOfFields="4"
+			android:textColor="@color/black"
+			android:itemBackground="@drawable/spinner_bg"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/payType"
+			/>
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/confirmButton"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="20dp"
+			android:layout_marginEnd="20dp"
+			android:backgroundTint="@color/background_btn"
+			android:paddingTop="16dp"
+			android:paddingBottom="16dp"
+			android:text="Authorize"
+			android:textAllCaps="false"
+			android:textSize="16sp"
+			android:layout_marginBottom="32dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"/>
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="fill_parent"-->
+<!--    android:layout_height="fill_parent"-->
+<!--    android:orientation="vertical" >-->
+<!--    -->
+<!--	<EditText-->
+<!--	    android:id="@+id/pinEditText"-->
+<!--	    android:layout_width="fill_parent"-->
+<!--	    android:layout_height="wrap_content"-->
+<!--	    android:layout_marginLeft="5dip"-->
+<!--	    android:layout_marginRight="5dip"-->
+<!--	    android:hint="@string/pin"-->
+<!--	    android:inputType="numberPassword" />-->
+<!--	-->
+<!--	<LinearLayout-->
+<!--	    android:layout_width="fill_parent"-->
+<!--	    android:layout_height="wrap_content"-->
+<!--	    android:layout_below="@id/pinEditText"-->
+<!--	    android:orientation="horizontal" >-->
+<!--	    -->
+<!--	    <Button-->
+<!--		    android:id="@+id/confirmButton"-->
+<!--		    android:layout_width="0dip"-->
+<!--		    android:layout_height="wrap_content"-->
+<!--			android:layout_margin="8dp"-->
+<!--			android:layout_weight="0.5"-->
+<!--		    android:text="@string/confirm" />-->
+<!--		-->
+<!--		<Button-->
+<!--		    android:id="@+id/bypassButton"-->
+<!--		    android:layout_width="0dip"-->
+<!--		    android:layout_height="wrap_content"-->
+<!--		    android:layout_weight="0.5"-->
+<!--			android:visibility="gone"-->
+<!--		    android:text="@string/bypass" />-->
+<!--		-->
+<!--		<Button-->
+<!--		    android:id="@+id/cancelButton"-->
+<!--		    android:layout_width="0dip"-->
+<!--		    android:layout_height="wrap_content"-->
+<!--		    android:layout_weight="0.5"-->
+<!--			android:layout_margin="8dp"-->
+<!--			android:text="@string/cancel" />-->
+<!--		-->
+<!--	</LinearLayout>-->
+<!--	    -->
+<!--</RelativeLayout>-->

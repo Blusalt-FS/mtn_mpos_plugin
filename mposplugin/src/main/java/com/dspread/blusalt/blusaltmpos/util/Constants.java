@@ -18,8 +18,12 @@ public class Constants {
     public static final String INTENT_Port = "Port_In";
 
     public static final String AMOUNT = "amount";
+
+    public static final String APIKEY = "APIKEY";
     public static final String AMOUNT_INT = "amount_int";
 
+    public static final String IS_KEY_INJECTED = "key_injection";
+    public static final String KEY_INJECTED_BLUETOOTH = "key_injected_bluetooth";
 
     public static final String INTENT_MID = "mid_key";
     public static final String INTENT_SN = "sn_key";

@@ -1,19 +1,19 @@
 <app>
     <9F06>00000000000000000000000000000000</9F06> <!--Application Identifier(AID)–terminal-->
-    <5F2A>0484</5F2A> <!--Transaction Currency Code-->
+    <5F2A>0566</5F2A> <!--Transaction Currency Code-->
     <5F36>00</5F36> <!--Transaction Currency Exponent-->
     <9F01>000000000000</9F01> <!--Acquirer Identifier-->
     <9F09>0096</9F09> <!--Application Version Number-->
     <9F15>0000</9F15> <!--Merchant Category Code-->
     <9F16>000000000000000000000000000000</9F16> <!--Merchant Identifier，add 0x00 if the digits is not enough-->
-    <9F1A>0484</9F1A> <!--Terminal Country Code-->
+    <9F1A>0566</9F1A> <!--Terminal Country Code-->
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>0000000000000000</9F1C> <!--Terminal Identification-->
     <9F1E>0000000000000000</9F1E> <!--Interface Device (IFD) Serial Number-->
     <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>00</9F39> <!--Point-of-Service (POS) Entry Mode-->
-    <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
+    <9F3C>0566</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Application Reference Currency-->
     <9F40>F000F0A001</9F40> <!--Additional Terminal Capabilities-->
     <9F4E></9F4E> <!--Merchant Name and Location，add 0x00 if the digits is not enough-->
@@ -43,20 +43,20 @@
 
 <app>
     <9F06>A0000000031010</9F06> <!--Application Identifier(AID)–terminal-->
-    <5F2A>0484</5F2A> <!--Transaction Currency Code-->
+    <5F2A>0566</5F2A> <!--Transaction Currency Code-->
     <5F36>00</5F36> <!--Transaction Currency Exponent-->
     <9F01>001234567890</9F01> <!--Acquirer Identifier-->
     <9F09>0096</9F09> <!--Application Version Number-->
     <9F15>1234</9F15> <!--Merchant Category Code-->
     <9F16>4243544553543132333435363738</9F16> <!--Merchant Identifier，add 0x00 if the digits is not enough-->
-    <9F1A>0484</9F1A> <!--Terminal Country Code-->
+    <9F1A>0566</9F1A> <!--Terminal Country Code-->
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
     <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
-    <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
+    <9F3C>0566</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--Additional Terminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
@@ -86,20 +86,20 @@
 
 <app>
     <9F06>A0000000032010</9F06> <!--Application Identifier(AID)–terminal-->
-    <5F2A>0484</5F2A> <!--Transaction Currency Code-->
+    <5F2A>0566</5F2A> <!--Transaction Currency Code-->
     <5F36>00</5F36> <!--Transaction Currency Exponent-->
     <9F01>001234567890</9F01> <!--Acquirer Identifier-->
     <9F09>0096</9F09> <!--Application Version Number-->
     <9F15>1234</9F15> <!--Merchant Category Code-->
     <9F16>4243544553543132333435363738</9F16> <!--Merchant Identifier，add 0x00 if the digits is not enough-->
-    <9F1A>0484</9F1A> <!--Terminal Country Code-->
+    <9F1A>0566</9F1A> <!--Terminal Country Code-->
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
     <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
-    <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
+    <9F3C>0566</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--AdditionalTerminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
@@ -129,20 +129,20 @@
 
 <app>
     <9F06>A0000000033010</9F06> <!--Application Identifier(AID)–terminal-->
-    <5F2A>0484</5F2A> <!--Transaction Currency Code-->
+    <5F2A>0566</5F2A> <!--Transaction Currency Code-->
     <5F36>00</5F36> <!--Transaction Currency Exponent-->
     <9F01>001234567890</9F01> <!--Acquirer Identifier-->
     <9F09>0096</9F09> <!--Application Version Number-->
     <9F15>1234</9F15> <!--Merchant Category Code-->
     <9F16>4243544553543132333435363738</9F16> <!--Merchant Identifier，add 0x00 if the digits is not enough-->
-    <9F1A>0484</9F1A> <!--Terminal Country Code-->
+    <9F1A>0566</9F1A> <!--Terminal Country Code-->
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
     <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
-    <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
+    <9F3C>0566</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--AdditionalTerminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
@@ -172,13 +172,13 @@
 
 <app>
     <9F06>A0000000041010</9F06> <!--Application Identifier(AID)–terminal-->
-    <5F2A>0484</5F2A> <!--Transaction Currency Code-->
+    <5F2A>0566</5F2A> <!--Transaction Currency Code-->
     <5F36>00</5F36> <!--Transaction Currency Exponent-->
     <9F01>001234567890</9F01> <!--Acquirer Identifier-->
     <9F09>0002</9F09> <!--Application Version Number-->
     <9F15>1234</9F15> <!--Merchant Category Code-->
     <9F16>4243544553543132333435363738</9F16> <!--Merchant Identifier，add 0x00 if the digits is not enough-->
-    <9F1A>0484</9F1A> <!--Terminal Country Code-->
+    <9F1A>0566</9F1A> <!--Terminal Country Code-->
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
 	<9F1D>6C00800000000000</9F1D>
@@ -186,7 +186,7 @@
     <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
-    <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
+    <9F3C>0566</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--AdditionalTerminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
@@ -219,20 +219,20 @@
 
 <app>
     <9F06>A00000002501</9F06> <!--Application Identifier(AID)–terminal-->
-    <5F2A>0484</5F2A> <!--Transaction Currency Code-->
+    <5F2A>0566</5F2A> <!--Transaction Currency Code-->
     <5F36>00</5F36> <!--Transaction Currency Exponent-->
     <9F01>001234567890</9F01> <!--Acquirer Identifier-->
     <9F09>0001</9F09> <!--Application Version Number-->
     <9F15>1234</9F15> <!--Merchant Category Code-->
     <9F16>4243544553543132333435363738</9F16> <!--Merchant Identifier，add 0x00 if the digits is not enough-->
-    <9F1A>0484</9F1A> <!--Terminal Country Code-->
+    <9F1A>0566</9F1A> <!--Terminal Country Code-->
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
     <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
-    <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
+    <9F3C>0566</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--AdditionalTerminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
@@ -263,20 +263,20 @@
 
 <app>
     <9F06>A0000005241010</9F06> <!--Application Identifier(AID)–terminal-->
-    <5F2A>0484</5F2A> <!--Transaction Currency Code-->
+    <5F2A>0566</5F2A> <!--Transaction Currency Code-->
     <5F36>00</5F36> <!--Transaction Currency Exponent-->
     <9F01>001234567890</9F01> <!--Acquirer Identifier-->
     <9F09>0096</9F09> <!--Application Version Number-->
     <9F15>1234</9F15> <!--Merchant Category Code-->
     <9F16>4243544553543132333435363738</9F16> <!--Merchant Identifier，add 0x00 if the digits is not enough-->
-    <9F1A>0484</9F1A> <!--Terminal Country Code-->
+    <9F1A>0566</9F1A> <!--Terminal Country Code-->
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
     <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
-    <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
+    <9F3C>0566</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--AdditionalTerminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
@@ -306,20 +306,20 @@
 
 <app>
     <9F06>A0000000651010</9F06> <!--Application Identifier(AID)–terminal-->
-    <5F2A>0484</5F2A> <!--Transaction Currency Code-->
+    <5F2A>0566</5F2A> <!--Transaction Currency Code-->
     <5F36>00</5F36> <!--Transaction Currency Exponent-->
     <9F01>001234567890</9F01> <!--Acquirer Identifier-->
     <9F09>0096</9F09> <!--Application Version Number-->
     <9F15>1234</9F15> <!--Merchant Category Code-->
     <9F16>4243544553543132333435363738</9F16> <!--Merchant Identifier，add 0x00 if the digits is not enough-->
-    <9F1A>0484</9F1A> <!--Terminal Country Code-->
+    <9F1A>0566</9F1A> <!--Terminal Country Code-->
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
     <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
-    <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
+    <9F3C>0566</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--AdditionalTerminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
@@ -349,20 +349,20 @@
 
 <app>
     <9F06>A0000001523010</9F06> <!--Application Identifier(AID)–terminal-->
-    <5F2A>0484</5F2A> <!--Transaction Currency Code-->
+    <5F2A>0566</5F2A> <!--Transaction Currency Code-->
     <5F36>00</5F36> <!--Transaction Currency Exponent-->
     <9F01>001234567890</9F01> <!--Acquirer Identifier-->
     <9F09>0096</9F09> <!--Application Version Number-->
     <9F15>1234</9F15> <!--Merchant Category Code-->
     <9F16>4243544553543132333435363738</9F16> <!--Merchant Identifier，add 0x00 if the digits is not enough-->
-    <9F1A>0484</9F1A> <!--Terminal Country Code-->
+    <9F1A>0566</9F1A> <!--Terminal Country Code-->
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
     <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
-    <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
+    <9F3C>0566</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--AdditionalTerminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
@@ -392,20 +392,20 @@
 
 <app>
     <9F06>A0000003330101</9F06> <!--Application Identifier(AID)–terminal-->
-    <5F2A>0484</5F2A> <!--Transaction Currency Code-->
+    <5F2A>0566</5F2A> <!--Transaction Currency Code-->
     <5F36>00</5F36> <!--Transaction Currency Exponent-->
     <9F01>001234567890</9F01> <!--Acquirer Identifier-->
     <9F09>0096</9F09> <!--Application Version Number-->
     <9F15>1234</9F15> <!--Merchant Category Code-->
     <9F16>4243544553543132333435363738</9F16> <!--Merchant Identifier，add 0x00 if the digits is not enough-->
-    <9F1A>0484</9F1A> <!--Terminal Country Code-->
+    <9F1A>0566</9F1A> <!--Terminal Country Code-->
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
     <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
-    <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
+    <9F3C>0566</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--AdditionalTerminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->

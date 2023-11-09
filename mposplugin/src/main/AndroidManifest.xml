@@ -36,10 +36,11 @@
         android:name="android.permission.HARDWARE_TEST"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission
-        android:name="android.permission.INSTALL_PACKAGES"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+<!--    <uses-permission-->
+<!--        android:name="android.permission.INSTALL_PACKAGES"-->
+<!--        tools:ignore="ProtectedPermissions" />-->
+<!--    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />-->
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -110,8 +111,16 @@
 
         </activity>
         <activity
-            android:name="com.dspread.blusalt.activities.PosBluetoothActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:name="com.dspread.blusalt.activities.WelcomeActivitySerial"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name="com.dspread.blusalt.activities.OtherActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name="com.dspread.blusalt.activities.PosBluetoothActivity" />
         <activity
             android:name="com.dspread.blusalt.activities.printer.MPPrintBitmapActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -142,9 +151,7 @@
         <activity
             android:name="com.dspread.blusalt.activities.printer.MPPrintTicketActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity
-            android:name="com.dspread.blusalt.activities.OtherActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+
         <activity
             android:name="com.dspread.blusalt.activities.mp5801.BlackMarkActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />

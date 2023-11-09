@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical">
 
     <include
@@ -241,7 +242,7 @@
         android:gravity="center"
         android:padding="8dp"
         android:layout_marginTop="32dp"
-        android:text="Insert Card into the mPOS"
+        android:text="Checking mPOS"
         android:textColor="@color/black"
         android:visibility="gone"
         android:textSize="18sp"
@@ -339,6 +340,7 @@
         android:text="Search Mpos Bluetooth"
         android:textAllCaps="false"
         android:textSize="16sp"
+        android:textColor="@color/white"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -359,6 +361,7 @@
         android:textAllCaps="false"
         android:textSize="16sp"
         android:visibility="gone"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -374,6 +377,7 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:text="Continue"
+        android:textColor="@color/white"
         android:textAllCaps="false"
         android:textSize="16sp"
         android:visibility="gone"

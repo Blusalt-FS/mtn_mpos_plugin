@@ -33,24 +33,26 @@ class TransactionStatus : AppCompatActivity() {
 
         if (result != null) {
             Log.e("TAG response", Gson().toJson(response))
-            Log.e("TAG amount", response.data.receiptInfo.transactionAmount)
-            activityTransactionStatusBinding!!.amountText.setText("₦ " + response.data.receiptInfo.transactionAmount + ".00")
-            if (response.data.posResponseCode.equals("00")) {
-                activityTransactionStatusBinding!!.statusText.setText("Transaction Approved")
-            } else {
-                activityTransactionStatusBinding!!.statusText.setText("Transaction Declined")
+//            Log.e("TAG amount", response.data.receiptInfo.transactionAmount)
+            if (response.message != "card payment failed") {
+                activityTransactionStatusBinding?.amountText?.setText("₦ " + response.data.receiptInfo.transactionAmount + ".00")
+                if (response.data.posResponseCode.equals("00")) {
+                    activityTransactionStatusBinding?.statusText?.setText("Transaction Approved")
+                } else {
+                    activityTransactionStatusBinding?.statusText?.setText("Transaction Declined")
+                }
+                activityTransactionStatusBinding?.terminalIdTxtValue?.setText(response.data.receiptInfo.merchantTID)
+                activityTransactionStatusBinding?.cardholderNameTxtValue?.setText(response.data.receiptInfo.customerCardName)
+                activityTransactionStatusBinding?.rrnTxtValue?.setText(response.data.receiptInfo.rrn)
+                activityTransactionStatusBinding?.cardNumberTxtValue?.setText(response.data.receiptInfo.customerCardPan)
             }
-            activityTransactionStatusBinding!!.terminalIdTxtValue.setText(response.data.receiptInfo.merchantTID)
-            activityTransactionStatusBinding!!.cardholderNameTxtValue.setText(response.data.receiptInfo.customerCardName)
-            activityTransactionStatusBinding!!.rrnTxtValue.setText(response.data.receiptInfo.rrn)
-            activityTransactionStatusBinding!!.cardNumberTxtValue.setText(response.data.receiptInfo.customerCardPan)
         }
 
         activityTransactionStatusBinding!!.backButton.setOnClickListener {
 
-            appPreferenceHelper!!.setSharedPreferenceString(
+            appPreferenceHelper?.setSharedPreferenceString(
                 Constants.TRANSACTION_RESPONSE,
-                response.data.posResponseCode
+                response.data.posResponseCode ?: ""
             )
 
             val intent = Intent(this@TransactionStatus, AmountEntryActivity::class.java)

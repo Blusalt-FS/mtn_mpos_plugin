@@ -17,6 +17,11 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.dspread.blusalt.R;
 import com.dspread.blusalt.activities.printer.PrintSettingActivity;
 import com.dspread.blusalt.beans.VersionEnty;
@@ -39,12 +44,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-public class WelcomeActivity extends BaseActivity implements OnClickListener {
+public class WelcomeActivitySerial extends BaseActivity implements OnClickListener {
     private Button audio, serial_port, normal_blu, pos_blu, other_blu, print;
     private Intent intent;
 
@@ -75,14 +75,14 @@ public class WelcomeActivity extends BaseActivity implements OnClickListener {
 
         welcometoolbar = (Toolbar) findViewById(R.id.welcometoolbar);
         audio = (Button) findViewById(R.id.audio);
-        serial_port = (Button) findViewById(R.id.serial_port);
+        serial_port = (Button) findViewById(R.id.search_button);
         normal_blu = (Button) findViewById(R.id.normal_bluetooth);
         pos_blu = (Button) findViewById(R.id.pos_bluetooth);
         other_blu = (Button) findViewById(R.id.other_bluetooth);
         mProgressBar = findViewById(R.id.pb_loading);
         print = (Button) findViewById(R.id.print);
         mp600Print = findViewById(R.id.mp600_print);
-        searchButton = findViewById(R.id.search_button);
+//        searchButton = findViewById(R.id.search_button);
 
         if (Build.MODEL.equals("D20")) {
             print.setVisibility(View.GONE);
@@ -96,11 +96,11 @@ public class WelcomeActivity extends BaseActivity implements OnClickListener {
         other_blu.setOnClickListener(this);
         print.setOnClickListener(this);
         mp600Print.setOnClickListener(this);
-        searchButton.setOnClickListener(this);
+//        searchButton.setOnClickListener(this);
 
         bluetoothRelaPer();
         try {
-            boolean b = NetCheckHelper.checkNetworkAvailable(WelcomeActivity.this);
+            boolean b = NetCheckHelper.checkNetworkAvailable(WelcomeActivitySerial.this);
             if (b) {
 //                checkNewVersion();
                 TRACE.d("network connection");
@@ -118,7 +118,7 @@ public class WelcomeActivity extends BaseActivity implements OnClickListener {
 
 //    private void checkNewVersion() throws IOException {
 //        String commitUrl = "https://gitlab.com/api/v4/projects/4128550/jobs/artifacts/master/raw/pos_android_studio_demo/pos_android_studio_app/build/outputs/apk/release/commit.json?job=assembleRelease";
-//        downloadFileCourse(WelcomeActivity.this, commitUrl, PathUtils.getAppExtCachePath(), "commit.json");
+//        downloadFileCourse(WelcomeActivitySerial.this, commitUrl, PathUtils.getAppExtCachePath(), "commit.json");
 //    }
 
     @Override
@@ -127,7 +127,7 @@ public class WelcomeActivity extends BaseActivity implements OnClickListener {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_welcome;
+        return R.layout.activity_welcome_serial;
     }
 
     @Override
@@ -144,7 +144,7 @@ public class WelcomeActivity extends BaseActivity implements OnClickListener {
             intent = new Intent(this, OtherActivity.class);
             intent.putExtra("connect_type", 1);
             startActivity(intent);
-        } else if (id == R.id.serial_port) {//Serial Port
+        } else if (id == R.id.search_button) {//Serial Port
             intent = new Intent(this, OtherActivity.class);
             intent.putExtra("connect_type", 2);
             startActivity(intent);
@@ -156,14 +156,14 @@ public class WelcomeActivity extends BaseActivity implements OnClickListener {
             intent = new Intent(this, PosBluetoothActivity.class);
             intent.putExtra("connect_type", 3);
             startActivity(intent);
-        } else if (id == R.id.other_bluetooth) {//Other Bluetooth，such as：BLE，，，
-            intent = new Intent(this, MposMainActivity.class);
-            intent.putExtra("connect_type", 4);
-            startActivity(intent);
-        } else if (id == R.id.search_button) {//Other Bluetooth，such as：BLE，，，
-            intent = new Intent(this, MposMainActivity.class);
-            intent.putExtra("connect_type", 3);
-            startActivity(intent);
+//        } else if (id == R.id.other_bluetooth) {//Other Bluetooth，such as：BLE，，，
+//            intent = new Intent(this, MposMainActivity.class);
+//            intent.putExtra("connect_type", 4);
+//            startActivity(intent);
+//        } else if (id == R.id.search_button) {//Other Bluetooth，such as：BLE，，，
+//            intent = new Intent(this, MposMainActivity.class);
+//            intent.putExtra("connect_type", 3);
+//            startActivity(intent);
         } else if (id == R.id.print) {
             Log.d("pos", "print");
             intent = new Intent(this, PrintSettingActivity.class);
@@ -180,41 +180,41 @@ public class WelcomeActivity extends BaseActivity implements OnClickListener {
             Intent enabler = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivity(enabler);
         }
-        lm = (LocationManager) WelcomeActivity.this.getSystemService(WelcomeActivity.this.LOCATION_SERVICE);
+        lm = (LocationManager) WelcomeActivitySerial.this.getSystemService(WelcomeActivitySerial.this.LOCATION_SERVICE);
         boolean ok = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (ok) {//Location service is on
-            if (ContextCompat.checkSelfPermission(WelcomeActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+            if (ContextCompat.checkSelfPermission(WelcomeActivitySerial.this, Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
                 Log.e("POS_SDK", "Permission Denied");
                 // Permission denied
                 // Request authorization
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    if (ContextCompat.checkSelfPermission(WelcomeActivity.this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED
-                            || ContextCompat.checkSelfPermission(WelcomeActivity.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED
-                            || ContextCompat.checkSelfPermission(WelcomeActivity.this, Manifest.permission.BLUETOOTH_ADVERTISE) != PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(WelcomeActivitySerial.this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED
+                            || ContextCompat.checkSelfPermission(WelcomeActivitySerial.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED
+                            || ContextCompat.checkSelfPermission(WelcomeActivitySerial.this, Manifest.permission.BLUETOOTH_ADVERTISE) != PackageManager.PERMISSION_GRANTED) {
                         String[] list = new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH_ADVERTISE};
-                        ActivityCompat.requestPermissions(WelcomeActivity.this, list, BLUETOOTH_CODE);
+                        ActivityCompat.requestPermissions(WelcomeActivitySerial.this, list, BLUETOOTH_CODE);
 
                     }
                 } else {
-                    ActivityCompat.requestPermissions(WelcomeActivity.this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_CODE);
+                    ActivityCompat.requestPermissions(WelcomeActivitySerial.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_CODE);
                 }
 //                        Toast.makeText(getActivity(), "Permission Denied", Toast.LENGTH_SHORT).show();
             } else {
                 // have permission
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    if (ContextCompat.checkSelfPermission(WelcomeActivity.this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED
-                            || ContextCompat.checkSelfPermission(WelcomeActivity.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED
-                            || ContextCompat.checkSelfPermission(WelcomeActivity.this, Manifest.permission.BLUETOOTH_ADVERTISE) != PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(WelcomeActivitySerial.this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED
+                            || ContextCompat.checkSelfPermission(WelcomeActivitySerial.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED
+                            || ContextCompat.checkSelfPermission(WelcomeActivitySerial.this, Manifest.permission.BLUETOOTH_ADVERTISE) != PackageManager.PERMISSION_GRANTED) {
                         String[] list = new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH_ADVERTISE};
-                        ActivityCompat.requestPermissions(WelcomeActivity.this, list, BLUETOOTH_CODE);
+                        ActivityCompat.requestPermissions(WelcomeActivitySerial.this, list, BLUETOOTH_CODE);
                     }
                 }
-                Toast.makeText(WelcomeActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(WelcomeActivitySerial.this, "Permission Granted", Toast.LENGTH_SHORT).show();
             }
         } else {
             Log.e("BRG", "System detects that the GPS location service is not turned on");
-            Toast.makeText(WelcomeActivity.this, "System detects that the GPS location service is not turned on", Toast.LENGTH_SHORT).show();
+            Toast.makeText(WelcomeActivitySerial.this, "System detects that the GPS location service is not turned on", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
             intent.setAction(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivityForResult(intent, 1315);
@@ -230,10 +230,10 @@ public class WelcomeActivity extends BaseActivity implements OnClickListener {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Permission is agreed by the user
-                    Toast.makeText(WelcomeActivity.this, getString(R.string.msg_allowed_location_permission), Toast.LENGTH_LONG).show();
+                    Toast.makeText(WelcomeActivitySerial.this, getString(R.string.msg_allowed_location_permission), Toast.LENGTH_LONG).show();
                 } else {
                     // Permission is denied by the user
-                    Toast.makeText(WelcomeActivity.this, getString(R.string.msg_not_allowed_loaction_permission), Toast.LENGTH_LONG).show();
+                    Toast.makeText(WelcomeActivitySerial.this, getString(R.string.msg_not_allowed_loaction_permission), Toast.LENGTH_LONG).show();
                 }
             }
             break;
@@ -244,7 +244,7 @@ public class WelcomeActivity extends BaseActivity implements OnClickListener {
     private void dialog(String downUrl, String versionName, String modifyContent) {
         // final String modifyContent1 = "update name#123#fix bug#update name#123#fix bug";
         //final String content = modifyContent.replaceAll("#", "\n");
-        CustomDialog.Builder builder = new CustomDialog.Builder(WelcomeActivity.this);
+        CustomDialog.Builder builder = new CustomDialog.Builder(WelcomeActivitySerial.this);
         builder.setTitle("Found New Version");
         builder.setMessage(
                 "upgrade version：" + versionName + "？" + "\n" +
@@ -261,7 +261,7 @@ public class WelcomeActivity extends BaseActivity implements OnClickListener {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         // String downloadUrl = "https://gitlab.com/api/v4/projects/4128550/jobs/artifacts/develop_new_demo/raw/pos_android_studio_demo/pos_android_studio_app/build/outputs/apk/release/pos_android_studio_app-release.apk?job=assembleRelease";
-                        UpdateAppHelper.useApkDownLoadFunction(WelcomeActivity.this, downUrl);
+                        UpdateAppHelper.useApkDownLoadFunction(WelcomeActivitySerial.this, downUrl);
                     }
                 });
         builder.setCloseButton(new CustomDialog.OnCloseClickListener() {
@@ -341,7 +341,7 @@ public class WelcomeActivity extends BaseActivity implements OnClickListener {
                                 Log.e("download_Success-JSON;", s + "" + "versionCode:" + versionCode);
                                 String downloadUrl = versionEnty.getDownloadUrl();
                                 Log.e("download_Success-JSON", "downloadUrl:" + downloadUrl);
-                                int packageVersionCode = UpdateAppHelper.getPackageVersionCode(WelcomeActivity.this, "com.dspread.demoui");
+                                int packageVersionCode = UpdateAppHelper.getPackageVersionCode(WelcomeActivitySerial.this, "com.dspread.demoui");
                                 if (packageVersionCode < versionCodeInt) {
                                     dialog(downloadUrl, versionName.toString(), modifyContent.toString());
                                 }

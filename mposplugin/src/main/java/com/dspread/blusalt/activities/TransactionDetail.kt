@@ -50,23 +50,23 @@ class TransactionDetail : AppCompatActivity() {
             Log.e("TAG response", Gson().toJson(response))
             Log.e("TAG amount", response.data.receiptInfo.transactionAmount)
 
-            activityTransactionDetailBinding!!.receiptValue.setText(response.data.receiptInfo.reference)
-            activityTransactionDetailBinding!!.terminalValue.setText(response.data.receiptInfo.merchantTID)
-            activityTransactionDetailBinding!!.dateValue.setText(response.data.receiptInfo.transactionDate + " " + response.data.receiptInfo.transactionTime)
-            activityTransactionDetailBinding!!.cardValue.setText(response.data.cardScheme)
-            activityTransactionDetailBinding!!.cardExValue.setText(response.data.receiptInfo.customerCardExpiry)
-            activityTransactionDetailBinding!!.clientValue.setText(response.data.receiptInfo.customerCardName)
-            activityTransactionDetailBinding!!.panValue.setText(response.data.receiptInfo.customerCardPan)
-            activityTransactionDetailBinding!!.aidValue.setText(response.data.receiptInfo.transactionAID)
+            activityTransactionDetailBinding?.receiptValue?.setText(response.data.receiptInfo.reference)
+            activityTransactionDetailBinding?.terminalValue?.setText(response.data.receiptInfo.merchantTID)
+            activityTransactionDetailBinding?.dateValue?.setText(response.data.receiptInfo.transactionDate + " " + response.data.receiptInfo.transactionTime)
+            activityTransactionDetailBinding?.cardValue?.setText(response.data.cardScheme)
+            activityTransactionDetailBinding?.cardExValue?.setText(response.data.receiptInfo.customerCardExpiry)
+            activityTransactionDetailBinding?.clientValue?.setText(response.data.receiptInfo.customerCardName)
+            activityTransactionDetailBinding?.panValue?.setText(response.data.receiptInfo.customerCardPan)
+            activityTransactionDetailBinding?.aidValue?.setText(response.data.receiptInfo.transactionAID)
             if (response.data.posResponseCode.equals("00")) {
-                activityTransactionDetailBinding!!.messageValue.setText("Transaction Approved")
+                activityTransactionDetailBinding?.messageValue?.setText("Transaction Approved")
             } else {
-                activityTransactionDetailBinding!!.messageValue.setText("Transaction Declined")
+                activityTransactionDetailBinding?.messageValue?.setText("Transaction Declined")
             }
-            activityTransactionDetailBinding!!.stanValue.setText(response.data.receiptInfo.transactionSTAN)
-            activityTransactionDetailBinding!!.rrnValue.setText(response.data.receiptInfo.rrn)
+            activityTransactionDetailBinding?.stanValue?.setText(response.data.receiptInfo.transactionSTAN)
+            activityTransactionDetailBinding?.rrnValue?.setText(response.data.receiptInfo.rrn)
 
-            activityTransactionDetailBinding!!.amountText.setText("₦ " + response.data.receiptInfo.transactionAmount + ".00")
+            activityTransactionDetailBinding?.amountText?.setText("₦ " + response.data.receiptInfo.transactionAmount + ".00")
 
             timer.start()
         }

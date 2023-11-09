@@ -440,7 +440,7 @@ public class MposMainActivity extends BaseActivity {
      * @param mode
      */
     private void open(CommunicationMode mode) {
-        TRACE.d("open");
+        Log.e("TAG Open", "open");
         //pos=null;
 //        MyPosListener listener = new MyPosListener();
         MyQposClass listener = new MyQposClass();
@@ -459,7 +459,9 @@ public class MposMainActivity extends BaseActivity {
         Handler handler = new Handler(Looper.myLooper());
         pos.initListener(handler, listener);
         String sdkVersion = pos.getSdkVersion();
-        Toast.makeText(MposMainActivity.this, "sdkVersion--" + sdkVersion, Toast.LENGTH_SHORT).show();
+        Log.e("TAG POS sdkVersion ", sdkVersion);
+
+//        Toast.makeText(MposMainActivity.this, "sdkVersion--" + sdkVersion, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -795,22 +797,6 @@ public class MposMainActivity extends BaseActivity {
         public void onRequestWaitingUser() {//wait user to insert/swipe/tap card
             TRACE.d("onRequestWaitingUser()");
             dismissDialog();
-
-            spinKit = findViewById(R.id.gifImageView);
-            spinKit.setImageResource(R.drawable.card);
-            spinKit.setVisibility(View.VISIBLE);
-
-            mToolbar.setText("Payment");
-//            validate_text.setText("Insert Card into the mPOS");
-            validate_text.setVisibility(View.VISIBLE);
-            insert_text.setVisibility(View.VISIBLE);
-            insert_amount.setVisibility(View.VISIBLE);
-
-            validateImage.setVisibility(View.GONE);
-            about_to_text.setVisibility(View.GONE);
-            validate_amount_text.setVisibility(View.GONE);
-            doTradeButton.setVisibility(View.GONE);
-
             Log.e("TAG POS", getString(R.string.waiting_for_card));
         }
 
@@ -1161,7 +1147,8 @@ public class MposMainActivity extends BaseActivity {
                     dismissDialog();
                 }
             });
-            dialog.show();
+            //            dialog.show();
+            Toast.makeText(getApplicationContext(), messageTextView.getText(), Toast.LENGTH_SHORT).show();
             amount = "";
             cashbackAmount = "";
         }
@@ -1398,7 +1385,6 @@ public class MposMainActivity extends BaseActivity {
 //                                pos.sendOnlineProcessResult(str);//Script notification/55domain/ICCDATA
                     Log.e("Check", "Process Trans");
                     proceedToExChangeData("00", creditCard);
-                    insert_text.setText("Transaction Processing...");
                     dismissDialog();
                 }
 //                    analyData(tlv);// analy tlv ,get the tag you need
@@ -1520,7 +1506,7 @@ public class MposMainActivity extends BaseActivity {
         public void onRequestQposConnected() {
             TRACE.d("onRequestQposConnected()");
 
-            Toast.makeText(MposMainActivity.this, "onRequestQposConnected", Toast.LENGTH_LONG).show();
+            Toast.makeText(MposMainActivity.this, "Mpos Connected", Toast.LENGTH_LONG).show();
             dismissDialog();
             long use_time = new Date().getTime() - start_time;
             // Log.e("TAG POS", getString(R.string.device_plugged));
@@ -1601,6 +1587,7 @@ public class MposMainActivity extends BaseActivity {
                     return;
                 }
                 pos.resetPosStatus();
+                Toast.makeText(getApplicationContext(), R.string.device_reset, Toast.LENGTH_LONG).show();
                 Log.e("TAG POS", getString(R.string.device_reset));
             }
         }
@@ -1709,7 +1696,27 @@ public class MposMainActivity extends BaseActivity {
 
         @Override
         public void onReturnCustomConfigResult(boolean isSuccess, String result) {
-            TRACE.d("onReturnCustomConfigResult(boolean isSuccess, String result):" + isSuccess + TRACE.NEW_LINE + result);
+
+            if (isSuccess){
+                appPreferenceHelper.setSharedPreferenceBoolean(Constants.IS_KEY_INJECTED, true);
+                appPreferenceHelper.setSharedPreferenceString(Constants.KEY_INJECTED_BLUETOOTH, blueTootchAddress);
+                Log.e("Log TAG", "Key Injected: " + isSuccess + "\nblueTootchAddress: " + blueTootchAddress);
+            }else {
+                appPreferenceHelper.setSharedPreferenceBoolean(Constants.IS_KEY_INJECTED, false);
+            }
+
+            insert_text.setText("Insert Card into the mPOS");
+            isPinCanceled = false;
+            Log.e("TAG POS", String.valueOf(R.string.starting));
+            terminalTime = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
+            if (posType == POS_TYPE.UART) {
+                pos.doTrade(terminalTime, 0, 30);
+            } else {
+                int keyIdex = getKeyIndex();
+                pos.doTrade(keyIdex, 30);//start do trade
+            }
+
+            Log.e("onReturnCustomConfigResult(boolean isSuccess, String result):",  isSuccess + TRACE.NEW_LINE + result);
             Log.e("TAG POS", "result: " + isSuccess + "\ndata: " + result);
         }
 
@@ -1719,9 +1726,10 @@ public class MposMainActivity extends BaseActivity {
             creditCard = new CreditCard();
 
             dismissDialog();
-            dialog = new Dialog(MposMainActivity.this);
+            dialog = new Dialog(MposMainActivity.this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
             dialog.setContentView(R.layout.pin_dialog);
             dialog.setTitle(getString(R.string.enter_pin));
+
             dialog.findViewById(R.id.confirmButton).setOnClickListener(new OnClickListener() {
 
                 @Override
@@ -1734,10 +1742,11 @@ public class MposMainActivity extends BaseActivity {
 //                        } else {
 //                            pos.sendPin(pin);
 //                        }
-                        TRACE.d("myPinblock" + " " + pin);
+//                        TRACE.d("myPinblock" + " " + pin);
                         cPin = pin;
                         creditCard.setPIN(pin);
                         pos.sendPin(pin);
+                        insert_text.setText("Transaction Processing...");
                     } else {
                         Toast.makeText(MposMainActivity.this, "The length just can input 4 - 12 digits", Toast.LENGTH_LONG).show();
                     }
@@ -1754,15 +1763,15 @@ public class MposMainActivity extends BaseActivity {
 //                }
 //            });
 
-            dialog.findViewById(R.id.cancelButton).setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    isPinCanceled = true;
-                    pos.cancelPin();
-                    dismissDialog();
-                }
-            });
+//            dialog.findViewById(R.id.cancelButton).setOnClickListener(new OnClickListener() {
+//
+//                @Override
+//                public void onClick(View v) {
+//                    isPinCanceled = true;
+//                    pos.cancelPin();
+//                    dismissDialog();
+//                }
+//            });
             dialog.show();
 
         }
@@ -2082,7 +2091,7 @@ public class MposMainActivity extends BaseActivity {
         @Override
         public void onRequestDeviceScanFinished() {
             TRACE.d("onRequestDeviceScanFinished()");
-            Toast.makeText(MposMainActivity.this, R.string.scan_over, Toast.LENGTH_LONG).show();
+//            Toast.makeText(MposMainActivity.this, R.string.scan_over, Toast.LENGTH_LONG).show();
             animScan.stop();
             imvAnimScan.setVisibility(View.GONE);
         }
@@ -2578,7 +2587,7 @@ public class MposMainActivity extends BaseActivity {
     public static void init(String secretKey, Context context) {
         if (!TextUtils.isEmpty(secretKey)) {
             try {
-                MemoryManager.getInstance(context).putUserSecretKey(secretKey);
+                MemoryManager.getInstance().putUserSecretKey(secretKey);
             } catch (Exception e) {
                 AppLog.e("prepareForPrinter", e.getMessage());
             }
@@ -2754,7 +2763,7 @@ public class MposMainActivity extends BaseActivity {
             Log.e("Tag currencyCode", currencyCode.substring(11, currencyCode.length() - 1));
 
             String countryCode = String.valueOf(pos.getICCTag(QPOSService.EncryptType.PLAINTEXT, 0, 1, "9F1A"));
-            Log.e("Tag CardNo", countryCode.substring(11, countryCode.length() - 1));
+            Log.e("Tag countryCode", countryCode.substring(11, countryCode.length() - 1));
 
             String AmountAuthorized = String.valueOf(pos.getICCTag(QPOSService.EncryptType.PLAINTEXT, 0, 1, "9F02"));
             Log.e("Tag AmountAuthorized", AmountAuthorized.substring(11, AmountAuthorized.length() - 1));
@@ -2955,21 +2964,83 @@ public class MposMainActivity extends BaseActivity {
                     Log.e("TAG POS", String.valueOf(R.string.scan_bt_pos_error));
                     return;
                 }
-                ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-                if (networkInfo != null && networkInfo.isConnected()) {
-                    isPinCanceled = false;
-                    Log.e("TAG POS", String.valueOf(R.string.starting));
-                    terminalTime = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
-                    if (posType == POS_TYPE.UART) {
-                        pos.doTrade(terminalTime, 0, 30);
+
+                if (appPreferenceHelper.getSharedPreferenceBoolean(Constants.IS_KEY_INJECTED)
+                        && appPreferenceHelper.getSharedPreferenceString(Constants.KEY_INJECTED_BLUETOOTH).equals(blueTootchAddress)) {
+
+                    ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+                    if (networkInfo != null && networkInfo.isConnected()) {
+
+                        spinKit = findViewById(R.id.gifImageView);
+                        spinKit.setImageResource(R.drawable.card);
+                        spinKit.setVisibility(View.VISIBLE);
+
+                        mToolbar.setText("Payment");
+                        insert_amount.setText(appPreferenceHelper.getSharedPreferenceString(Constants.AMOUNT));
+
+                        validate_text.setVisibility(View.VISIBLE);
+                        insert_text.setVisibility(View.VISIBLE);
+                        insert_amount.setVisibility(View.VISIBLE);
+
+                        validateImage.setVisibility(View.GONE);
+                        about_to_text.setVisibility(View.GONE);
+                        validate_amount_text.setVisibility(View.GONE);
+                        doTradeButton.setVisibility(View.GONE);
+
+                        insert_text.setText("Insert Card into the mPOS");
+                        isPinCanceled = false;
+                        Log.e("TAG POS", String.valueOf(R.string.starting));
+                        terminalTime = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
+                        if (posType == POS_TYPE.UART) {
+                            pos.doTrade(terminalTime, 0, 30);
+                        } else {
+                            int keyIdex = getKeyIndex();
+                            pos.doTrade(keyIdex, 30);//start do trade
+                        }
+
                     } else {
-                        int keyIdex = getKeyIndex();
-                        pos.doTrade(keyIdex, 30);//start do trade
+                        Toast.makeText(getApplicationContext(), "Please connect to the Internet", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(getApplicationContext(), "Please connect to the Internet", Toast.LENGTH_SHORT).show();
+
+
+                }else {
+
+                    ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+                    if (networkInfo != null && networkInfo.isConnected()) {
+
+                        spinKit = findViewById(R.id.gifImageView);
+                        spinKit.setImageResource(R.drawable.card);
+                        spinKit.setVisibility(View.VISIBLE);
+
+                        mToolbar.setText("Payment");
+                        insert_amount.setText(appPreferenceHelper.getSharedPreferenceString(Constants.AMOUNT));
+
+                        validate_text.setVisibility(View.VISIBLE);
+                        insert_text.setVisibility(View.VISIBLE);
+                        insert_amount.setVisibility(View.VISIBLE);
+
+                        validateImage.setVisibility(View.GONE);
+                        about_to_text.setVisibility(View.GONE);
+                        validate_amount_text.setVisibility(View.GONE);
+                        doTradeButton.setVisibility(View.GONE);
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Please connect to the Internet", Toast.LENGTH_SHORT).show();
+                    }
+
+                    if (pos == null) {
+                        pos = QPOSService.getInstance(CommunicationMode.BLUETOOTH);
+                        pos.updateEMVConfigByXml(new String(FileUtils.readAssetsLine("NIGERIA-QPOS cute,CR100,D20,D30.xml", MposMainActivity.this)));
+                        Log.e("TAG open", "updating...");
+                    } else {
+                        pos.updateEMVConfigByXml(new String(FileUtils.readAssetsLine("NIGERIA-QPOS cute,CR100,D20,D30.xml", MposMainActivity.this)));
+                        Log.e("TAG open", "updating...");
+                    }
                 }
+
+
 
             } else if (v == btnUSB) {
                 USBClass usb = new USBClass();
@@ -3025,7 +3096,6 @@ public class MposMainActivity extends BaseActivity {
             } else if (v == btnDisconnect) {
                 close();
             } else if (v == continueBtn) {
-
                 validateImage.setVisibility(View.VISIBLE);
                 validate_text.setVisibility(View.VISIBLE);
                 about_to_text.setVisibility(View.VISIBLE);

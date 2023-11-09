@@ -281,12 +281,14 @@
                 android:id="@+id/aid_value"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:padding="2dp"
                 android:text="A000000037800"
-                android:layout_marginEnd="16dp"
+                android:gravity="end"
                 android:textColor="@color/text_color"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/aid_text"
                 app:layout_constraintTop_toTopOf="@+id/aid_text" />
 
             <com.google.android.material.textview.MaterialTextView
