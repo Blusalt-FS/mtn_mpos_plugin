@@ -6,27 +6,52 @@ plugins {
     id 'kotlin-android'
     id 'maven-publish'
 }
+
+def keystorePropertiesFile = rootProject.file("key.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+def githubPropertiesFile = rootProject.file("github.properties")
+def githubProperties = new Properties()
+githubProperties.load(new FileInputStream(githubPropertiesFile))
+
+def getVersionName = { ->
+    return "1.0-1"  // Replace with version Name
+}
+def getArtificatId = { ->
+    return "mposplugin" // Replace with library name ID
+}
+
 android {
     signingConfigs {
         debug {
-            storeFile file('app.keystore')
-            storePassword 'dspread'
-            keyPassword 'dspread'
-            keyAlias 'gundam_wing'
+//            storeFile file('app.keystore')
+//            storePassword 'dspread'
+//            keyPassword 'dspread'
+//            keyAlias 'gundam_wing'
+            keyAlias keystoreProperties['keyAliasDebug']
+            keyPassword keystoreProperties['keyPasswordDebug']
+            storeFile file(keystoreProperties['storeFileDebug'])
+            storePassword keystoreProperties['storePasswordDebug']
         }
         config {
-            keyAlias 'key0'
-            keyPassword '123789'
-            storeFile file('dspread.jks')
-            storePassword '123789'
+//            keyAlias 'key0'
+//            keyPassword '123789'
+//            storeFile file('dspread.jks')
+//            storePassword '123789'
+            keyAlias keystoreProperties['keyAliasConfig']
+            keyPassword keystoreProperties['keyPasswordConfig']
+            storeFile file(keystoreProperties['storeFileConfig'])
+            storePassword keystoreProperties['storePasswordConfig']
         }
     }
-    namespace 'com.dspread.blusalt'
-    compileSdkVersion 33
+
+    namespace 'net.blusalt.mposplugin'
+    compileSdkVersion 34
     defaultConfig {
-//        applicationId "com.dspread.blusalt"
+//        applicationId "net.blusalt.mpos"
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 19
         versionName "4.2.12"
         ndk {
@@ -42,11 +67,13 @@ android {
         exclude 'org/bouncycastle/x509/CertPathReviewerMessages.properties'
     }
     buildTypes {
-        distributable.initWith(buildTypes.release)
-        distributable {
+        mPosSDK.initWith(buildTypes.release)
+        mPosSDK {
+//            You could add more config here if needed, e.g. shrinkResources
             minifyEnabled true
 //            proguardFiles 'proguard-rules-distributable.txt' // if you want to use a specific proguard configuration for the AAR artifact
         }
+
 //        release {
 //            debuggable false
 //            shrinkResources false
@@ -64,12 +91,14 @@ android {
         jniLibs.srcDir 'libs'
         jni.srcDirs = []
     }
+
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
         disable 'MissingTranslation'
         disable 'ExtraTranslation'
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -94,14 +123,29 @@ android {
     }
 }
 
+
 project.afterEvaluate {
     publishing {
         publications {
-            libraryProject(MavenPublication) {
+            mPosSDK(MavenPublication) {
                 setGroupId 'net.blusalt'
-                setArtifactId 'mpos-sdk-release'
-                version '1.0'
+                setArtifactId getArtificatId()
+                version getVersionName()
                 artifact bundleReleaseAar
+            }
+        }
+
+        repositories {
+            maven {
+                name = 'GitHubPackages'
+                url = uri("https://maven.pkg.github.com/Blusalt-FS/MPosAppPlugin")
+
+                credentials {
+                    username = githubProperties['USERNAME_GITHUB']
+                    password = githubProperties['TOKEN_GITHUB']
+
+                    println "GitHubPackages Publish Artifact:\n\tusername=$username\n\ttoken=$password"
+                }
             }
         }
     }

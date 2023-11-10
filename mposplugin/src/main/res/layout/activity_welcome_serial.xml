@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background"
-    tools:context=".activities.WelcomeActivity">
+    tools:context="net.blusalt.mposplugin.activities.WelcomeActivity">
 
     <include
         layout="@layout/toolbar_layout"

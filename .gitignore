@@ -6,3 +6,5 @@
 /build
 /captures
 .externalNativeBuild
+/github.properties
+/key.properties

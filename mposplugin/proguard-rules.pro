@@ -61,7 +61,7 @@
         public *;
 }
 
--keep,allowshrinking public  class com.dspread.blusalt.beans.VersionEnty{
+-keep,allowshrinking public  class net.blusalt.mposplugin.beans.VersionEnty{
         public *;
 }
 
@@ -82,7 +82,7 @@
 # Application classes that will be serialized/deserialized over Gson
 # 此处需修改成自己项目中的 bean 类位置
 
--keep class com.dspread.blusalt.beans.** { <fields>; }
+-keep class net.blusalt.mposplugin.beans.** { <fields>; }
 
 # Prevent proguard from stripping interface information from TypeAdapter, TypeAdapterFactory,
 # JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
