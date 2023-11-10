@@ -13,8 +13,6 @@ TOKEN_GITHUB=TokenFromGithubClassicToken
 
 ## Step 2: build.gradle (app)
 ```sh
-
-
 def githubPropertiesFile = rootProject.file("github.properties")
 def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(githubPropertiesFile))
