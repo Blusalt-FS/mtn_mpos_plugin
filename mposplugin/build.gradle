@@ -16,7 +16,7 @@ def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(githubPropertiesFile))
 
 def getVersionName = { ->
-    return "1.0-2"  // Replace with version Name
+    return "1.0-3"  // Replace with version Name
 }
 def getArtificatId = { ->
     return "mposplugin" // Replace with library name ID
@@ -67,13 +67,6 @@ android {
         exclude 'org/bouncycastle/x509/CertPathReviewerMessages.properties'
     }
     buildTypes {
-        mPosSDK.initWith(buildTypes.release)
-        mPosSDK {
-//            You could add more config here if needed, e.g. shrinkResources
-            minifyEnabled true
-//            proguardFiles 'proguard-rules-distributable.txt' // if you want to use a specific proguard configuration for the AAR artifact
-        }
-
 //        release {
 //            debuggable false
 //            shrinkResources false
