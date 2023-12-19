@@ -13,6 +13,8 @@ public class Constants {
     public static final String INTENT_CLEAR_MASTER_KEY = "clearMaster";
     public static final String INTENT_CLEAR_PIN_KEY = "pinMaster";
 
+    public static final String INTENT_TERMINAL_CONFIG = "terminal_config";
+    public static final String INTENT_KEY_CONFIG = "key_config";
     public static final String INTENT_CLEAR_SESSION_KEY = "session_key";
     public static final String INTENT_IP = "IP_In";
     public static final String INTENT_Port = "Port_In";

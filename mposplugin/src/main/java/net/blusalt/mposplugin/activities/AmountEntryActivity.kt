@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.davidmiguel.numberkeyboard.NumberKeyboardListener
 import net.blusalt.mposplugin.MemoryManager
+import net.blusalt.mposplugin.Pos
 import net.blusalt.mposplugin.R
 import net.blusalt.mposplugin.blusaltmpos.pos.AppLog
 import net.blusalt.mposplugin.blusaltmpos.util.AppPreferenceHelper
@@ -119,6 +120,7 @@ class AmountEntryActivity : AppCompatActivity() {
     fun init(secretKey: String?, context: Context?) {
         if (!TextUtils.isEmpty(secretKey)) {
             try {
+                Pos().init(context!!.applicationContext)
                 MemoryManager.getInstance().putUserSecretKey(secretKey)
             } catch (e: java.lang.Exception) {
                 AppLog.e("prepareForPrinter", e.message)

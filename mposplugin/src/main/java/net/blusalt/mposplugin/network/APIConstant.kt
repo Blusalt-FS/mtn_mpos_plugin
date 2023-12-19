@@ -11,7 +11,11 @@ import retrofit2.Response
  */
 object APIConstant {
 
-    const val BASE_LIVE_URL = "https://dev-wallets.blusalt.net/"
+    //    const val BASE_LIVE_URL = "https://dev-wallets.blusalt.net/"
+    const val BASE_LIVE_URL = "https://wallets.blusalt.net/"
+
+    const val BASE_DEV_URL_OMNI = "https://dev-omnipro-api.blusalt.net/"
+    const val BASE_LIVE_URL_OMNI_TMS = "https://omnipro-api.blusalt.net/tms/"
 
     const val POST_TRANSACTION = "pos"
 

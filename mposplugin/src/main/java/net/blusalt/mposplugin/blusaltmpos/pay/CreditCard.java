@@ -13,6 +13,7 @@ public class CreditCard {
     private String holderName;
     private String serviceCode;
     private String PIN;
+    private String PINBLOCK;
     private String cardSequenceNumber;
     private MagData magData;
     private EmvData emvData;
@@ -140,6 +141,13 @@ public class CreditCard {
         this.cardSequenceNumber = cardSequenceNumber;
     }
 
+    public String getPINBLOCK() {
+        return PINBLOCK;
+    }
+
+    public void setPINBLOCK(String PINBLOCK) {
+        this.PINBLOCK = PINBLOCK;
+    }
     public MagData getMagData() {
         return magData;
     }
@@ -155,4 +163,5 @@ public class CreditCard {
     public void setEmvData(EmvData emvData) {
         this.emvData = emvData;
     }
+
 }

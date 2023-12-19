@@ -1,10 +1,37 @@
 package net.blusalt.mposplugin.blusaltmpos.pay;
 import androidx.annotation.Keep;
 
+import net.blusalt.mposplugin.processor.processor_blusalt.CardData;
+import net.blusalt.mposplugin.processor.processor_blusalt.EmvData;
+import net.blusalt.mposplugin.processor.processor_blusalt.TerminalInformation;
+
 import java.io.Serializable;
 @Keep
 public class TerminalInfo   implements Serializable {
 
+    public String rrn;
+    public String transactionDateTime;
+    public String transactionTime;
+    public String expiryDate;
+    public String serviceCode;
+    public String iccData;
+    public String pinData;
+
+    public String merchantCategoryCode;
+    public String terminalMerchantID;
+    public String merchantNameAndLocation;
+
+    public String processingCode;
+    public String sessionKey;
+    public String transactionDate;
+    public String otherAmount;
+    public String de62;
+    public String de63;
+    public CardData cardData;
+    public EmvData emvData;
+    public TerminalInformation terminalInformation;
+
+    public String iccdata;
     public String  deviceOs;
     public String serialNumber;
     public String device;
